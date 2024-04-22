@@ -1,0 +1,18 @@
+.description_1{
+    overflow: hidden ; 
+    display: -webkit-box ;
+    -webkit-box-orient: vertical ;
+    -webkit-line-clamp: 1;
+}
+.description_2{
+    overflow: hidden ; 
+    display: -webkit-box ;
+    -webkit-box-orient: vertical ;
+    -webkit-line-clamp: 2;
+}
+.description_3{
+    overflow: hidden ; 
+    display: -webkit-box ;
+    -webkit-box-orient: vertical ;
+    -webkit-line-clamp: 3;
+}

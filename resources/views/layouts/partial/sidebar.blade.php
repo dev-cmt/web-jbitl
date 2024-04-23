@@ -26,39 +26,7 @@
             </li>
             @endcanany
 
-            @canany('Member', 'Student Member', 'Candidate Member', 'Professional Member', 'Associate Member', 'Trade Member', 'Corporate Member')
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-user-9"></i>
-                    <span class="nav-text">Member</span>
-                </a>
-                <ul aria-expanded="false">
-                    @foreach ($memberType as $item)
-                        <li><a href="{{Route('member.index', $item->id )}}">{{$item->name}} </a></li>
-                    @endforeach
-                    @canany('Member approve access','Member approved', 'Member approve record')
-                    <li><a href="{{Route('members-approve.index', 4)}}">Approve One</a></li>
-                    <li><a href="{{Route('members-approve.index', 3)}}">Approve Two</a></li>
-                    <li><a href="{{Route('members-approve.index', 1)}}">Approve Final</a></li>
-                    @endcanany
-                    
-                    @canany('Data Setting')
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Data Setting</a>
-                        <ul aria-expanded="false">
-                            @canany('CommitteeType access','CommitteeType create','CommitteeType edit','CommitteeType view', 'CommitteeType delete')
-                                <li><a href="{{Route('committee-type.index')}}">Add Committee Types</a></li>
-                            @endcanany
-                            @canany('MemberType access','MemberType create','MemberType edit','MemberType view', 'MemberType delete')
-                                <li><a href="{{Route('member-type.index')}}">Add Member Types</a></li>
-                            @endcanany
-                            @canany('Qualification access','Qualification create','Qualification edit','Qualification view', 'Qualification delete')
-                                <li><a href="{{Route('member-qualification.index')}}">Add Qualification</a></li>
-                            @endcanany
-                        </ul>
-                    </li>
-                    @endcanany
-                </ul>
-            </li>
-            @endcanany
+
 
             @canany('Member', 'Student Member', 'Candidate Member', 'Professional Member', 'Associate Member', 'Trade Member', 'Corporate Member')
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

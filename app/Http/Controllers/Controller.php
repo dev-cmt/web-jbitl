@@ -6,8 +6,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Admin\Contact;
-use App\Models\Master\MemberType;
-use App\Models\Master\CommitteeType;
 use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
@@ -15,7 +13,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $message;
-    protected $memberType;
     
     public function __construct()
     {
@@ -25,10 +22,6 @@ class Controller extends BaseController
                 $this->message = Contact::get();
                 view()->share('message', $this->message);
             }
-            // Retrieve Member types
-            $this->memberType = MemberType::get();
-            view()->share('memberType', $this->memberType);
-            
             return $next($request);
         });
     }

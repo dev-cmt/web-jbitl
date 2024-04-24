@@ -253,3 +253,44 @@ table.dataTable tbody td {
 [data-header-position="fixed"] .content-body {
   padding-top: 4.5rem !important;
 }
+
+
+
+
+
+/*-------------------------------------------------------
+*	Product Page
+*--------------------------------------------------------
+*/
+
+.products-item{
+	background: #ffffff;
+	padding: 20px 15px;
+	text-align: left;
+}
+.products-item:hover{
+	background: #dddddd;
+}
+.products-item h5{
+	padding-bottom: 5px;
+	color: #151515;
+}
+.products-item p{
+	font-weight: bold;
+	color: #151515;
+}
+.download-pdf-catalog{
+	background: #151515;
+	padding: 8px 5px;
+}
+.download-pdf-catalog:hover{
+	background: #C50000;
+	color: #fff !important;
+	transition: all 1s;
+}
+.download-pdf-catalog a{
+	color:#fff;
+}
+.download-pdf-catalog a:hover{
+	color:#fff;
+}

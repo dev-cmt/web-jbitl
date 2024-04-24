@@ -2,46 +2,36 @@
 
     <div class="row">
         <div class="col-12 d-flex justify-content-between">
-            <h4 class="card-title">{{$item->title}} {{$item->duration}}</h4>
+            <h4 class="card-title">{{$item->title}}</h4>
             <button type="button" id="open_modal" class="btn btn-sm btn-secondary float-right"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Create New</button>
         </div>
     </div>
 
     <div class="row" id="content-section">
         @foreach ($data as $row)
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 items" id="col_{{ $row->id }}">
-            <div class="card contact-bx item-content">
-                <div class="card-header border-0">
-                    <div class="action-dropdown">
-                        <div class="dropdown">
-                            <a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#575757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item edit" href="javascript:void(0);" id="data-show" data-id="{{ $row->id }}">Edit</a>
-                                <a class="dropdown-item delete" href="javascript:void(0);">Delete</a>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" id="col_{{ $row->id }}">
+                <div class="d-flex">
+                    <a class="rounded-0 btn btn-success edit" href="javascript:void(0);" id="data-show" data-id="{{ $row->id }}">Edit</a>
+                    <a class="rounded-0 btn btn-danger delete" href="javascript:void(0);">Delete</a>
                 </div>
-                <div class="card-body user-profile">
-                    <div class="image-bx">
-                        <img src="{{asset('public/images/past-committee')}}/{{$row->image}}" data-src="{{asset('public/images')}}/logo.png" alt="" class="rounded-circle">
-                        <span class="active"></span>
-                    </div>
-                    <div class="media-body user-meta-info">
-                        <h6 class="fs-20 font-w500 my-1">{{$row->name}}</h6>
-                        <p class="fs-16 mb-1">DESIG: <span class="text-danger">{{$row->designation}}</span></p>
-                        <a href="{{$row->rep_url}}" target="_blank" class="fs-16 mb-2">REP: <span class="text-info">{{$row->represent}}</span></a>
-                    </div>
+                <article class="products-item">
+                    <h5><i class="mdi mdi-forward"></i>{{ $row->title }}</h5>
+                    @foreach (json_decode($row->description) as $col)
+                        <p>{{ $col->ingredient }}</p>
+                        <ul>
+                            @foreach ($col->list as $listItem)
+                                <li><i class="mdi mdi-check-all"></i>{{ $listItem->name }}</li>
+                            @endforeach
+                        </ul>
+                    @endforeach
+                </article>
+                <div class="download-pdf-catalog">
+                    <a href="#"><i class="mdi mdi-file-pdf"></i> Click here for PDF catalog</a>
                 </div>
             </div>
-        </div>
         @endforeach
+
+        
         
     </div>
     <!--=======//Modal Show Data//========-->
@@ -56,49 +46,22 @@
                 <form class="form-valide" data-action="{{ route('past-committee-member.store') }}" method="POST" enctype="multipart/form-data" id="add-user-form">
                     @csrf
                     <input type="hidden" name="id" id="set_id">
-                    <input type="hidden" name="past_committee_id" id="{{$item->id}}">
+                    <input type="text" name="product_category_id" value="{{$item->id}}">
                     <div class="modal-body py-2">
                         <div class="row" id="main-row-data">
                             <div class="col-md-12">
-                                <div class="image-placeholder">
-                                    <div class="avatar-edit">
-                                        <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg">
-                                        <label for="imageUpload"></label>
-                                    </div>
-                                    <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url('{{asset('public/images')}}/logo.png');"></div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">Product Title</label>
+                                    <div class="col-md-8">
+                                        <input type="text" name="title" id="title" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">Name</label>
+                                    <label class="col-md-4 col-form-label">File Path</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="name" id="name" class="form-control" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">Designation</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="designation" id="designation" class="form-control" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">Represent Company</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="represent" id="represent" class="form-control" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <label class="col-md-4 col-form-label">Rp. Company URL</label>
-                                    <div class="col-md-8">
-                                        <input type="text" name="rep_url" id="rep_url" class="form-control" value="">
+                                        <input type="file" name="file_path" id="file_path" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
@@ -128,6 +91,31 @@
                             </div>
                         </div>
 
+                        <div class="row" style="height: 180px; overflow-y: auto">
+                            <div class="col-md-12">
+                                <!--=====//Table//=====-->
+                                <div class="table-responsive">
+                                    <table id="items-table" class="table table-bordered">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th width="45%">Name</th>
+                                                <th width="23%" class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="table-body">
+                                            <tr>
+                                                <td><input type="text" name="moreFile[0][sub_item]" class="form-control val_description" placeholder="XXXXXXXXXX"></td>
+                                                <td class="text-center">
+                                                    <button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row"><span class="fa fa-plus"></span></button>
+                                                    <button type="button" title="Remove" class="btn btn-icon btn-outline-danger btn-xs border-0 remove-row"><span class="fa fa-trash"></span></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>                                        
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer" style="height:50px">
                         <button type="button" class="btn btn-sm btn-danger light" data-dismiss="modal">Close</button>
@@ -143,10 +131,10 @@
         /*=======//Show Modal//=========*/
         $(document).on('click','#open_modal', function(){
             $("#set_id").val('');
-            $("#name").val('');
+            $("#title").val('');
             $("#designation").val('');
             $("#represent").val('');
-            $("#rep_url").val('');
+            $("#file_path").val('');
             $("#description").val('');
             $("#index").val('');
 
@@ -272,18 +260,26 @@
         });
 
     </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#imageUpload').on('change', function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    // Update background image of preview element
-                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                }
-                // Read the selected file as a data URL
-                reader.readAsDataURL(this.files[0]);
-            });
+    
+    <!--____________// ADD ROW \\____________-->
+    <script type="text/javascript">
+        var i = 0;
+        $('#items-table').on('click', '.add-row', function() {
+            ++i;
+            var newRow = $('<tr>' +
+                '<td><input type="text" name="moreFile['+i+'][sub_item]" class="form-control" placeholder="XXXXXXXXXX"></td>' +
+                '<td class="text-center">' +
+                    '<button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row"><span class="fa fa-plus"></span></button>' +
+                    '<button type="button" title="Remove" class="btn btn-icon btn-outline-danger btn-xs border-0 remove-row"><span class="fa fa-trash"></span></button>' +
+                '</td>'+
+            '</tr>');
+            $('#items-table tbody').append(newRow);
+        });
+        //======Remove ROW
+        $('#items-table').on('click', '.remove-row', function() {
+            $(this).closest('tr').remove();
+            var rec_qty= $('#rcvQty').val();
+            $('#rcvQty').val(rec_qty-1);
         });
 
     </script>

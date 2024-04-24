@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h6>{{$row->title}} {{$row->duration}}</h6>
+                        <h6>{{$row->title}} {{$row->icon}}</h6>
                     </div>
                     <div class="card-footer">
                         @if($row->status == 0)
@@ -62,9 +62,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label">Duration</label>
+                                    <label for="name" class="col-md-4 col-form-label">icon</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="duration" id="duration" class="form-control" placeholder="2000-2002" maxlength="9">
+                                        <input type="text" name="icon" id="icon" class="form-control" placeholder="2000-2002" maxlength="9">
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
         $(document).on('click','#open_modal', function(){
             $("#set_id").val('');
             $("#title").val('BAFIITA Executive Committee MEMBER’S');
-            $("#duration").val('2000-2002');
+            $("#icon").val('2000-2002');
 
             $(".modal-title").html('Add New');
             $("#exampleModalCenter").modal('show');
@@ -187,7 +187,7 @@
 
                     $("#set_id").val(response.id);
                     $("#title").val(response.title);
-                    $("#duration").val(response.duration);
+                    $("#icon").val(response.icon);
                     $("#index").val(response.index);
                     $("#description").val(response.description);
 

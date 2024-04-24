@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\LoseMemberController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\EventPaymentController;
-use App\Http\Controllers\Admin\PastCommitteeController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\BlogController;
 
 /*
@@ -220,13 +220,13 @@ Route::group(['middleware' => ['auth']], function(){
     //-- EVENTS
     Route::resource('event', EventController::class);
     //-- PAST COMMITTEE
-    Route::get('past-committee/index', [PastCommitteeController::class,'index'])->name('past-committee.index');
-    Route::POST('past-committee/store', [PastCommitteeController::class,'store'])->name('past-committee.store');
-    Route::get('past-committee/edit', [PastCommitteeController::class,'edit'])->name('past-committee.edit');
-    Route::get('past-committee/delete', [PastCommitteeController::class,'delete'])->name('past-committee.delete');
+    Route::get('past-committee/index', [ProductController::class,'index'])->name('past-committee.index');
+    Route::POST('past-committee/store', [ProductController::class,'store'])->name('past-committee.store');
+    Route::get('past-committee/edit', [ProductController::class,'edit'])->name('past-committee.edit');
+    Route::get('past-committee/delete', [ProductController::class,'delete'])->name('past-committee.delete');
     
-    Route::get('past-committee-memebr/{id}/index', [PastCommitteeController::class,'memberIndex'])->name('past-committee-member.index');
-    Route::POST('past-committee-memebr/store', [PastCommitteeController::class,'memberStore'])->name('past-committee-member.store');
+    Route::get('past-committee-memebr/{id}/index', [ProductController::class,'memberIndex'])->name('past-committee-member.index');
+    Route::POST('past-committee-memebr/store', [ProductController::class,'memberStore'])->name('past-committee-member.store');
     //-- BLOG
     Route::get('blog-news/index', [BlogController::class,'index'])->name('blog.index');
     Route::get('blog-news/create', [BlogController::class,'create'])->name('blog.create');

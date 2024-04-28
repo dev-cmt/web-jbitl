@@ -26,14 +26,14 @@ class CreateUserSeeder extends Seeder
     public function run()
     {
         $super_admin = User::create([
-            'name'=>'BAFIITA',
+            'name'=>'JBITL',
             'email_verified_at' => '2022-01-01',
             'email'=>'Admin',
             'status' => '1',
             'is_admin' => '1',
             'password'=>bcrypt('password'),
             'profile_photo_path'=>'fix/admin.jpg',
-            'member_code'=> 'BAFIITA-ADMIN',
+            'code'=> 'JBITL-ADMIN',
         ]);
         
         /**
@@ -47,7 +47,7 @@ class CreateUserSeeder extends Seeder
             'is_admin' => '1',
             'password'=>bcrypt('password'),
             'profile_photo_path'=>'fix/member.jpg',
-            'member_code'=> 'BAFIITA-MEMBER',
+            'code'=> 'BAFIITA-MEMBER',
         ]);
         
 

@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('product_items', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('file_path')->nullable();
-
+            $table->text('ingredient')->nullable();
             
             $table->unsignedBigInteger('product_category_id');
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');

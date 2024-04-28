@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-12 d-flex justify-content-between">
-            <h4 class="card-title">{{$item->title}}</h4>
+            <h4 class="card-title">{{$productCategory->title}}</h4>
             <button type="button" id="open_modal" class="btn btn-sm btn-secondary float-right"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Create New</button>
         </div>
     </div>
@@ -10,26 +10,38 @@
     <div class="row" id="content-section">
         @foreach ($data as $row)
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" id="col_{{ $row->id }}">
-                <div class="d-flex">
-                    <a class="rounded-0 btn btn-success edit" href="javascript:void(0);" id="data-show" data-id="{{ $row->id }}">Edit</a>
-                    <a class="rounded-0 btn btn-danger delete" href="javascript:void(0);">Delete</a>
+                <div class="float-right">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-success sharp" data-toggle="dropdown">
+                            <i class="flaticon-381-edit"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="javascript:void(0);" id="data-show" data-id="{{ $row->id }}">Edit</a>
+                            <a class="dropdown-item" href="javascript:void(0);" id="data-delete" data-id="{{ $row->id }}">Delete</a>
+                        </div>
+                    </div>
                 </div>
                 <article class="products-item">
                     <h5><i class="mdi mdi-forward"></i>{{ $row->title }}</h5>
-                    @foreach (json_decode($row->description) as $col)
-                        <p>{{ $col->ingredient }}</p>
+                    
+                    @if(isset($row->ingredient))
+                        @php
+                            $ingredients = json_decode($row->ingredient, true);
+                        @endphp
+                        <p>Main Ingredient</p>
                         <ul>
-                            @foreach ($col->list as $listItem)
-                                <li><i class="mdi mdi-check-all"></i>{{ $listItem->name }}</li>
+                            @foreach ($ingredients as $ingredient)
+                                <li><i class="mdi mdi-check-all"></i>{{ $ingredient['name'] }}</li>
                             @endforeach
                         </ul>
-                    @endforeach
+                    @endif
                 </article>
                 <div class="download-pdf-catalog">
                     <a href="#"><i class="mdi mdi-file-pdf"></i> Click here for PDF catalog</a>
                 </div>
             </div>
         @endforeach
+
 
         
         
@@ -43,10 +55,10 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
-                <form class="form-valide" data-action="{{ route('past-committee-member.store') }}" method="POST" enctype="multipart/form-data" id="add-user-form">
+                <form class="form-valide" data-action="{{ route('product-item.store') }}" method="POST" enctype="multipart/form-data" id="add-user-form">
                     @csrf
-                    <input type="hidden" name="id" id="set_id">
-                    <input type="text" name="product_category_id" value="{{$item->id}}">
+                    <input type="text" name="id" id="set_id">
+                    <input type="hidden" name="product_category_id" value="{{$productCategory->id}}">
                     <div class="modal-body py-2">
                         <div class="row" id="main-row-data">
                             <div class="col-md-12">
@@ -158,24 +170,39 @@
                     swal("Success Message Title", "Well done, you pressed a button", "success");
                     $("#exampleModalCenter").modal('hide');
                     
-                    var statusHtml = (response.status == 0) ? '<span class="badge light badge-danger"><i class="fa fa-circle text-danger mr-1"></i> Inactive</span>' : '<span class="badge light badge-success"><i class="fa fa-circle text-success mr-1"></i> Active</span>';
-                    
-                    var newRowHtml = `
-                    <div class="col-lg-4" id="col_${response.id}">
-                        <div class="card">
-                            <div class="card-header">
-                                <a href="{{ route('event.create') }}" class="btn btn-sm btn-primary py-1"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Member</a>
-                                <a href="#" class="btn btn-success shadow btn-xs sharp mr-1" id="data-show" data-id="${response.id}"><i class="fa fa-pencil"></i></a>
-                            </div>
-                            <div class="card-body">
-                                <h6>${response.title}</h6>
-                            </div>
-                            <div class="card-footer">${statusHtml}</div>
-                        </div>
-                    </div>`;
+                    var newRowHtml = '<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" id="col_' + response.id + '">' +
+                    '<div class="float-right">' +
+                        '<div class="dropdown">' +
+                            '<button type="button" class="btn btn-success sharp" data-toggle="dropdown">' +
+                                '<i class="flaticon-381-edit"></i>' +
+                            '</button>' +
+                            '<div class="dropdown-menu">' +
+                                '<a class="dropdown-item" href="javascript:void(0);" id="data-show" data-id="' + response.id + '">Edit</a>' +
+                                '<a class="dropdown-item" href="javascript:void(0);" id="data-delete" data-id="' + response.id + '">Delete</a>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<article class="products-item">' +
+                        '<h5><i class="mdi mdi-forward"></i>' + response.title + '</h5>' +
+                        '<p>Main Ingredient</p>' +
+                        '<ul>';
+                        var ingredients = JSON.parse(response.ingredient);
+                        ingredients.forEach(function(ingredient) {
+                            newRowHtml += '<li><i class="mdi mdi-check-all"></i>' + ingredient.name + '</li>';
+                        });
 
-                    if ($("#set_id").val()) { $("#col_" + response.id).replaceWith(newRowHtml); }
-                    else { $("#content-section").prepend(newRowHtml); }
+                        newRowHtml += '</ul>' +
+                        '</article>' +
+                        '<div class="download-pdf-catalog">' +
+                            '<a href="#"><i class="mdi mdi-file-pdf"></i> Click here for PDF catalog</a>' +
+                        '</div>' +
+                    '</div>';
+
+                    if ($("#set_id").val()) { 
+                        $("#col_" + response.id).replaceWith(newRowHtml); 
+                    } else { 
+                        $("#content-section").prepend(newRowHtml); 
+                    }
                 },
                 error: function (xhr) {
                     var errors = xhr.responseJSON.errors;
@@ -188,17 +215,11 @@
             });
         });
 
-        // Function to format the date
-        function formatDate(dateString) {
-            var date = new Date(dateString);
-            var options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return date.toLocaleDateString(undefined, options);
-        }
         /*========//Edit Or View Data//=========*/
         $(document).on('click', '#data-show', function(){
             var id = $(this).data('id');
             $.ajax({
-                url:'{{ route('past-committee.edit')}}',
+                url:'{{ route('product-item.edit')}}',
                 method:'GET',
                 dataType:"JSON",
                 data:{id:id},
@@ -215,6 +236,25 @@
                     var row = '<option value="1" ' + (response.status == 1 ? 'selected' : '') + '>Active</option>';
                     row += '<option value="0" ' + (response.status == 0 ? 'selected' : '') + '>Inactive</option>';
                     status.append(row);
+
+
+                    var tableBody = $('#table-body');
+                    tableBody.empty();
+
+                    var ingredients = JSON.parse(response.ingredient);
+                    $.each(ingredients, function(i, ingredient) {
+                        // Construct HTML for each row
+                        var html = '<tr>' +
+                                    '<td><input type="text" name="moreFile[' + i + '][sub_item]" class="form-control val_description" value="' + ingredient.name + '"></td>' +
+                                    '<td class="text-center">' +
+                                        '<button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row"><span class="fa fa-plus"></span></button>' +
+                                        '<button type="button" title="Remove" class="btn btn-icon btn-outline-danger btn-xs border-0 remove-row"><span class="fa fa-trash"></span></button>' +
+                                    '</td>' +
+                                '</tr>';
+                        
+                        // Append the HTML to the table body
+                        tableBody.append(html);
+                    });
 
                     $("#exampleModalCenter").modal('show');
                 },
@@ -238,7 +278,7 @@
                     // Place your delete code here
                     var id = $(this).data('id');
                     $.ajax({
-                        url:'{{ route('member-qualification.delete')}}',
+                        url:'{{ route('product-item.delete')}}',
                         method:'GET',
                         dataType:"JSON",
                         data:{'id':id},

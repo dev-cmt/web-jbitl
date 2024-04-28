@@ -11,14 +11,14 @@
             <div class="col-lg-4" id="col_{{ $row->id }}">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('past-committee-member.index', $row->id) }}" class="btn btn-sm btn-primary py-1"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Member</a>
+                        <a href="{{ route('product-item.index', $row->id) }}" class="btn btn-sm btn-primary py-1"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Add Item</a>
                         <div>
                             <a href="#" class="btn btn-success shadow btn-xs sharp mr-1" id="data-show" data-id="{{ $row->id }}"><i class="fa fa-pencil"></i></a>
                             <a href="#" class="btn btn-danger shadow btn-xs sharp mr-1" id="data-delete" data-id="{{ $row->id }}"><i class="fa fa-trash"></i></a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <h6>{{$row->title}} {{$row->icon}}</h6>
+                        <h6>{{$row->title}}</h6>
                     </div>
                     <div class="card-footer">
                         @if($row->status == 0)
@@ -45,7 +45,7 @@
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                     </button>
                 </div>
-                <form class="form-valide" data-action="{{ route('past-committee.store') }}" method="POST" enctype="multipart/form-data" id="add-user-form">
+                <form class="form-valide" data-action="{{ route('product-category.store') }}" method="POST" enctype="multipart/form-data" id="add-user-form">
                     @csrf
                     <input type="hidden" name="id" id="set_id">
                     <div class="modal-body py-2">
@@ -62,9 +62,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label">icon</label>
+                                    <label for="name" class="col-md-4 col-form-label">Icon</label>
                                     <div class="col-md-8">
-                                        <input type="text" name="icon" id="icon" class="form-control" placeholder="2000-2002" maxlength="9">
+                                        <input type="text" name="icon" id="icon" class="form-control" placeholder="mdi mdi-chemical-weapon" value="mdi mdi-chemical-weapon">
                                     </div>
                                 </div>
                             </div>
@@ -112,8 +112,8 @@
         /*=======//Show Modal//=========*/
         $(document).on('click','#open_modal', function(){
             $("#set_id").val('');
-            $("#title").val('BAFIITA Executive Committee MEMBER’S');
-            $("#icon").val('2000-2002');
+            $("#title").val('AE water reducing agent');
+            $("#icon").val('mdi mdi-chemical-weapon');
 
             $(".modal-title").html('Add New');
             $("#exampleModalCenter").modal('show');
@@ -141,7 +141,7 @@
                         <div class="col-lg-4" id="col_${response.id}">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('event.create') }}" class="btn btn-sm btn-primary py-1"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Member</a>
+                                    <a href="{{ route('product-item.index', $row->id) }}" class="btn btn-sm btn-primary py-1"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Add Item</a>
                                     <div>
                                         <a href="#" class="btn btn-success shadow btn-xs sharp mr-1" id="data-show" data-id="${response.id}"><i class="fa fa-pencil"></i></a>
                                         <a href="#" class="btn btn-danger shadow btn-xs sharp mr-1" id="data-delete" data-id="${response.id}"><i class="fa fa-trash"></i></a>
@@ -178,7 +178,7 @@
         $(document).on('click', '#data-show', function(){
             var id = $(this).data('id');
             $.ajax({
-                url:'{{ route('past-committee.edit')}}',
+                url:'{{ route('product-category.edit')}}',
                 method:'GET',
                 dataType:"JSON",
                 data:{id:id},
@@ -219,7 +219,7 @@
                     // Place your delete code here
                     var id = $(this).data('id');
                     $.ajax({
-                        url:'{{ route('past-committee.delete')}}',
+                        url:'{{ route('product-category.delete')}}',
                         method:'GET',
                         dataType:"JSON",
                         data:{'id':id},

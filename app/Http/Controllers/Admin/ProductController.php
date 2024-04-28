@@ -68,16 +68,15 @@ class ProductController extends Controller
      * MEMBER INDEX
      * -----------------------------------------------------------------------------
      */
-    public function memberIndex($id)
+    public function itemIndex($id)
     {
-        $item = ProductCategory::find($id);
+        $productCategory = ProductCategory::find($id);
         $data = ProductItem::whereIn('status', [0, 1])->get();
 
-        // return  $data;
-        return view('layouts.pages.past-committee.member-index', compact('data', 'item'));
+        return view('layouts.pages.past-committee.member-index', compact('data', 'productCategory'));
     }
 
-    public function memberStore(Request $request)
+    public function itemStore(Request $request)
     {
         // Validation Check 
         $validator = Validator::make($request->all(), [
@@ -90,47 +89,49 @@ class ProductController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // Extract descriptions from each item in the request
-        $descriptions = collect($request->moreFile)->pluck('sub_item')->implode(', ');
+        $ingredient = [];
 
-        // Data Save
-        $data = new ProductItem([
-            'title' => $request->title,
-            'description' => $descriptions,
-            'file_path' => $request->file_path,
-            'index' => $request->index,
-            'product_category_id' => $request->product_category_id,
-            'status' => 1,
-            'user_id' => Auth::user()->id,
-        ]);
+        foreach ($request->moreFile ?? [] as $item) {
+            // Add ingredient only if 'sub_item' exists
+            if (isset($item['sub_item'])) {
+                $ingredient[] = ["name" => $item['sub_item']];
+            }
+        }
+
+        //----Data Save
+        if(isset($request->id)){
+            $data = ProductItem::findOrFail($request->id);
+        }else{
+            $data = new ProductItem();
+        }
+        $data->title = $request->title;
+        $data->ingredient = json_encode($ingredient);
+        $data->file_path = $request->file_path;
+        $data->index = $request->index;
+        $data->product_category_id = $request->product_category_id;
+        $data->status = $request->status;
+        $data->user_id = Auth::user()->id;
         $data->save();
 
         // Return success response with saved data
         return response()->json($data);
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Gallery $gallery)
+    public function itemEdit(Request $request)
     {
-        return view('layouts.pages.gallery.show')->with('posts', $gallery);
+        $data = ProductItem::find($request->id);
+
+        // Return message
+        return response()->json($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function editMember($id)
+    public function itemDelete(Request $request)
     {
-       $posts=Gallery::findOrFail($id);
-        return view('layouts.pages.gallery.edit')->with('posts',$posts);
+        $data = ProductItem::findOrFail($request->id);
+        $data->delete();
+        
+        // Return message
+        return response()->json($data);
     }
 
 

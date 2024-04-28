@@ -25,49 +25,12 @@
                 </a>
             </li>
             @endcanany
-
-
-
+            
             @canany('Member', 'Student Member', 'Candidate Member', 'Professional Member', 'Associate Member', 'Trade Member', 'Corporate Member')
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-003-diamond"></i>
-                    <span class="nav-text">My Transactions</span>
+            <li>
+                <a href="{{ route('product-category.index')}}" class="ai-icon" aria-expanded="false">
+                    <i class="flaticon-381-box"></i><span class="nav-text">Products List</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li><a href="{{ Route('transaction-annual.index')}}">Annual Fee</a></li>
-                    <li><a href="{{ Route('transaction-event.index')}}">Event Fee</a></li>
-                </ul>
-            </li>
-            @endcanany
-
-            @canany('Payment menu access')
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="flaticon-381-database"></i>
-                    <span class="nav-text">Payment History</span>
-                </a>
-                <ul aria-expanded="false">
-                    @canany('Annual fees access', 'Annual fees approved', 'Annual fees record')
-                    <li><a href="{{Route('transaction-annual-approve.index')}}">Annual Fee Details</a></li>
-                    @endcanany
-                    @canany('Event fees access', 'Event fees approved', 'Event fees record')
-                    <li><a href="{{Route('transaction-event-approve.index')}}">Event Fee Details</a></li>
-                    @endcanany
-                    @canany('Membership fees access', 'Membership fees approved', 'Membership fees record')
-                    <li><a href="{{Route('transaction-registation-approve.index')}}">Membership Fee Details</a></li>
-                    @endcanany
-                    @canany('Data Setting')
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Data Setting</a>
-                        <ul aria-expanded="false">
-                            @canany('Pyment number access','Pyment number create','Pyment number edit', 'Pyment number view', 'Pyment number delete')
-                            <li><a href="{{Route('transaction-payment-number.index')}}">Setup Payment Number</a></li>
-                            @endcanany
-                            @canany('Pyment fees access','Pyment annual fees','Pyment membership fees')
-                            <li><a href="{{Route('transaction-payment-fees.index')}}">Setup Payment Fee</a></li>
-                            @endcanany
-                        </ul>
-                    </li>
-                    @endcanany
-                </ul>
             </li>
             @endcanany
 
@@ -77,9 +40,6 @@
                     <span class="nav-text">Web Post</span>
                 </a>
                 <ul aria-expanded="false">
-                    @canany('Gallery access','Gallery create','Gallery edit','Gallery delete')
-                        <li><a href="{{ Route('past-committee.index')}}">Past Committee</a></li>
-                    @endcanany
                     @canany('Gallery access','Gallery create','Gallery edit','Gallery delete')
                         <li><a href="{{ Route('blog.index')}}">Notice & News</a></li>
                     @endcanany

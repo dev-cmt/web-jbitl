@@ -7,7 +7,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="icon" href="{{asset('public/images')}}/favicon-300x300.png" type="image/x-icon">
+    <link rel="icon" href="{{asset('public/images')}}/favicon.png" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100,300,300i,400,500,600,700,900%7CRaleway:500">
     <link rel="stylesheet" href="{{asset('public/frontend')}}/css/bootstrap.css">

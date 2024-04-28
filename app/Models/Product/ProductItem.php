@@ -10,9 +10,11 @@ class ProductItem extends Model
     use HasFactory;
     
     protected $fillable = [
+        'code',
         'title',
         'description',
         'file_path',
+        'ingredient',
         'product_category_id',
         'status',
         'user_id',

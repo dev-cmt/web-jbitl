@@ -36,50 +36,18 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
-        'member_code',
+        'code',
         'password',
         'profile_photo_path',
-        'member_type_id',
-        'description',
-        'join_date',
-        'departure_date',
         'approve_by',
         'is_admin',
         'status',
         'index',
     ];
 
-    public function memberType()
-    {
-        return $this->belongsTo(MemberType::class, 'member_type_id');
-    }
     public function parentUser()
     {
         return $this->belongsTo(User::class, 'approve_by');
-    }
-    public function infoPersonal()
-    {
-        return $this->hasOne(InfoPersonal::class, 'member_id');
-    }
-    public function infoCompany()
-    {
-        return $this->hasOne(InfoCompany::class, 'member_id');
-    }
-    public function infoBank()
-    {
-        return $this->hasOne(InfoBank::class, 'member_id');
-    }
-    public function infoDocument()
-    {
-        return $this->hasOne(InfoDocument::class, 'member_id');
-    }
-    public function infoOther()
-    {
-        return $this->hasOne(InfoOther::class, 'member_id');
-    }
-    public function paymentDetails()
-    {
-        return $this->hasOne(PaymentDetails::class, 'member_id');
     }
     
 

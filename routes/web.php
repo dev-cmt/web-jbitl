@@ -219,14 +219,18 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('dashboard-gallery/{id}/show',[GalleryController::class,'bvGalleryImage'])->name('dashboard-gallery.images');
     //-- EVENTS
     Route::resource('event', EventController::class);
-    //-- PAST COMMITTEE
-    Route::get('past-committee/index', [ProductController::class,'index'])->name('past-committee.index');
-    Route::POST('past-committee/store', [ProductController::class,'store'])->name('past-committee.store');
-    Route::get('past-committee/edit', [ProductController::class,'edit'])->name('past-committee.edit');
-    Route::get('past-committee/delete', [ProductController::class,'delete'])->name('past-committee.delete');
+    //-- CATEGORY
+    Route::get('product-category/index', [ProductController::class,'index'])->name('product-category.index');
+    Route::POST('product-category/store', [ProductController::class,'store'])->name('product-category.store');
+    Route::get('product-category/edit', [ProductController::class,'edit'])->name('product-category.edit');
+    Route::get('product-category/delete', [ProductController::class,'delete'])->name('product-category.delete');
     
-    Route::get('past-committee-memebr/{id}/index', [ProductController::class,'memberIndex'])->name('past-committee-member.index');
-    Route::POST('past-committee-memebr/store', [ProductController::class,'memberStore'])->name('past-committee-member.store');
+    //-- ITEM
+    Route::get('product-item/{id}/index', [ProductController::class,'itemIndex'])->name('product-item.index');
+    Route::POST('product-item/store', [ProductController::class,'itemStore'])->name('product-item.store');
+    Route::get('product-item/edit', [ProductController::class,'itemEdit'])->name('product-item.edit');
+    Route::get('product-item/delete', [ProductController::class,'itemDelete'])->name('product-item.delete');
+    
     //-- BLOG
     Route::get('blog-news/index', [BlogController::class,'index'])->name('blog.index');
     Route::get('blog-news/create', [BlogController::class,'create'])->name('blog.create');

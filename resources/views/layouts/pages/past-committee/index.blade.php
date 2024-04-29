@@ -112,13 +112,15 @@
         /*=======//Show Modal//=========*/
         $(document).on('click','#open_modal', function(){
             $("#set_id").val('');
-            $("#title").val('AE water reducing agent');
+            $("#title").val('');
             $("#icon").val('mdi mdi-chemical-weapon');
 
             $(".modal-title").html('Add New');
             $("#exampleModalCenter").modal('show');
         });
         /*=======//Save Data //=========*/
+        var downloadUrl = "{{ route('product-item.index', ':id') }}";
+
         $('#add-user-form').on('submit', function(event){
             event.preventDefault();
             var url = $(this).attr('data-action');
@@ -130,8 +132,7 @@
                 contentType: false,
                 cache: false,
                 processData: false,
-                success:function(response)
-                {
+                success: function(response) {
                     swal("Success Message Title", "Well done, you pressed a button", "success");
                     $("#exampleModalCenter").modal('hide');
                     
@@ -141,7 +142,7 @@
                         <div class="col-lg-4" id="col_${response.id}">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('product-item.index', $row->id) }}" class="btn btn-sm btn-primary py-1"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Add Item</a>
+                                    <a href="${downloadUrl.replace(':id', response.id)}" class="btn btn-sm btn-primary py-1"><i class="fa fa-plus"></i><span class="btn-icon-add"></span>Add Item</a>
                                     <div>
                                         <a href="#" class="btn btn-success shadow btn-xs sharp mr-1" id="data-show" data-id="${response.id}"><i class="fa fa-pencil"></i></a>
                                         <a href="#" class="btn btn-danger shadow btn-xs sharp mr-1" id="data-delete" data-id="${response.id}"><i class="fa fa-trash"></i></a>
@@ -154,19 +155,28 @@
                             </div>
                         </div>`;
 
-                    if ($("#set_id").val()) { $("#col_" + response.id).replaceWith(newRowHtml); }
-                    else { $("#content-section").prepend(newRowHtml); }
+                    if ($("#set_id").val()) { 
+                        $("#col_" + response.id).replaceWith(newRowHtml); 
+                    } else { 
+                        $("#content-section").prepend(newRowHtml); 
+                    }
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     var errors = xhr.responseJSON.errors;
                     var errorHtml = '';
                     $.each(errors, function(key, value) {
                         errorHtml += `<li style="color:red">${value}</li>`;
                     });
-                    Swal.fire({ icon: 'error', title: 'Error!', html: `<ul>${errorHtml}</ul>`, text: 'All input values are not null or empty.' });
+                    Swal.fire({ 
+                        icon: 'error', 
+                        title: 'Error!', 
+                        html: `<ul>${errorHtml}</ul>`, 
+                        text: 'All input values are not null or empty.' 
+                    });
                 }
             });
         });
+
 
         // Function to format the date
         function formatDate(dateString) {

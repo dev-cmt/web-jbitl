@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('product_items', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->nullable();
+            $table->string('code')->nullable()->unique();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('file_path')->nullable();

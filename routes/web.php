@@ -230,6 +230,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::POST('product-item/store', [ProductController::class,'itemStore'])->name('product-item.store');
     Route::get('product-item/edit', [ProductController::class,'itemEdit'])->name('product-item.edit');
     Route::get('product-item/delete', [ProductController::class,'itemDelete'])->name('product-item.delete');
+    Route::get('product-item/{id}/download', [ProductController::class,'itemDownload'])->name('product-item.download');
     
     //-- BLOG
     Route::get('blog-news/index', [BlogController::class,'index'])->name('blog.index');

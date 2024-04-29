@@ -37,7 +37,7 @@
                     @endif
                 </article>
                 <div class="download-pdf-catalog">
-                    <a href="#"><i class="mdi mdi-file-pdf"></i> Click here for PDF catalog</a>
+                    <a href="{{route('product-item.download', $row->id)}}"><i class="mdi mdi-file-pdf"></i> Click here for PDF catalog</a>
                 </div>
             </div>
         @endforeach
@@ -57,7 +57,7 @@
                 </div>
                 <form class="form-valide" data-action="{{ route('product-item.store') }}" method="POST" enctype="multipart/form-data" id="add-user-form">
                     @csrf
-                    <input type="text" name="id" id="set_id">
+                    <input type="hidden" name="id" id="set_id">
                     <input type="hidden" name="product_category_id" value="{{$productCategory->id}}">
                     <div class="modal-body py-2">
                         <div class="row" id="main-row-data">
@@ -73,7 +73,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-4 col-form-label">File Path</label>
                                     <div class="col-md-8">
-                                        <input type="file" name="file_path" id="file_path" class="form-control" value="">
+                                        <input type="file" name="file_path" id="file_path" accept=".pdf"  class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
@@ -106,23 +106,26 @@
                         <div class="row" style="height: 180px; overflow-y: auto">
                             <div class="col-md-12">
                                 <!--=====//Table//=====-->
-                                <div class="table-responsive">
-                                    <table id="items-table" class="table table-bordered">
+                                <div class="table-responsive" id="items-table">
+                                    <div id="item-add-btn" class="float-right" style="display: none">
+                                        <button type="button" class="btn btn-sm btn-success rounded-0 add-row-btn"><span class="fa fa-plus mr-1"></span> ADD ITEM</button>
+                                    </div>
+                                    <table class="table table-bordered">
                                         <thead class="thead-light">
                                             <tr>
                                                 <th width="45%">Name</th>
-                                                <th width="23%" class="text-center">Action</th>
+                                                <th width="25%" class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="table-body">
                                             <tr>
-                                                <td><input type="text" name="moreFile[0][sub_item]" class="form-control val_description" placeholder="XXXXXXXXXX"></td>
+                                                <td><input type="text" name="moreFile[0][sub_item]" class="form-control val_description" placeholder="Ingredient Name...."></td>
                                                 <td class="text-center">
-                                                    <button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row"><span class="fa fa-plus"></span></button>
+                                                    <button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row-btn"><span class="fa fa-plus"></span></button>
                                                     <button type="button" title="Remove" class="btn btn-icon btn-outline-danger btn-xs border-0 remove-row"><span class="fa fa-trash"></span></button>
                                                 </td>
                                             </tr>
-                                        </tbody>                                        
+                                        </tbody>                                      
                                     </table>
                                 </div>
                             </div>
@@ -144,16 +147,18 @@
         $(document).on('click','#open_modal', function(){
             $("#set_id").val('');
             $("#title").val('');
-            $("#designation").val('');
-            $("#represent").val('');
             $("#file_path").val('');
             $("#description").val('');
             $("#index").val('');
+
+            $('#table-body').empty();
+            addRow(0);
 
             $(".modal-title").html('Add New');
             $("#exampleModalCenter").modal('show');
         });
         /*=======//Save Data //=========*/
+        var downloadUrl = "{{ route('product-item.download', ':id') }}";
         $('#add-user-form').on('submit', function(event){
             event.preventDefault();
             var url = $(this).attr('data-action');
@@ -194,7 +199,7 @@
                         newRowHtml += '</ul>' +
                         '</article>' +
                         '<div class="download-pdf-catalog">' +
-                            '<a href="#"><i class="mdi mdi-file-pdf"></i> Click here for PDF catalog</a>' +
+                            '<a href="' + downloadUrl.replace(':id', response.id) + '"><i class="mdi mdi-file-pdf"></i> Click here for PDF catalog</a>' +
                         '</div>' +
                     '</div>';
 
@@ -228,8 +233,9 @@
 
                     $("#set_id").val(response.id);
                     $("#title").val(response.title);
-                    $("#index").val(response.index);
+                    $("#file_path").val('');
                     $("#description").val(response.description);
+                    $("#index").val(response.index);
 
                     $("#status").empty();
                     var status = $("#status");
@@ -247,7 +253,7 @@
                         var html = '<tr>' +
                                     '<td><input type="text" name="moreFile[' + i + '][sub_item]" class="form-control val_description" value="' + ingredient.name + '"></td>' +
                                     '<td class="text-center">' +
-                                        '<button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row"><span class="fa fa-plus"></span></button>' +
+                                        '<button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row-btn"><span class="fa fa-plus"></span></button>' +
                                         '<button type="button" title="Remove" class="btn btn-icon btn-outline-danger btn-xs border-0 remove-row"><span class="fa fa-trash"></span></button>' +
                                     '</td>' +
                                 '</tr>';
@@ -284,7 +290,7 @@
                         data:{'id':id},
                         success:function(data){
                             swal("Success Message Title", "Well done, you pressed a button", "success");
-                            $('[data-id="' + id + '"]').closest('tr').hide();
+                            $("#col_" + data.id).hide();
                         },
                         error:function(){
                             swal("Error!", "There are no details available for this item.", "error");
@@ -303,25 +309,38 @@
     
     <!--____________// ADD ROW \\____________-->
     <script type="text/javascript">
-        var i = 0;
-        $('#items-table').on('click', '.add-row', function() {
-            ++i;
+        $('#items-table').on('click', '.add-row-btn', function() {
+            var rowCount = parseInt($('#items-table tbody tr td .add-row-btn').length);
+            addRow(rowCount);
+            if(rowCount < 0){
+                $('#item-add-btn').show();
+            }else{
+                $('#item-add-btn').hide();
+            }
+        });
+        function addRow(i){
             var newRow = $('<tr>' +
-                '<td><input type="text" name="moreFile['+i+'][sub_item]" class="form-control" placeholder="XXXXXXXXXX"></td>' +
+                '<td><input type="text" name="moreFile['+i+'][sub_item]" class="form-control" placeholder="Ingredient Name...."></td>' +
                 '<td class="text-center">' +
-                    '<button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row"><span class="fa fa-plus"></span></button>' +
+                    '<button type="button" title="Add New" class="btn btn-icon btn-outline-warning border-0 btn-xs add-row-btn"><span class="fa fa-plus"></span></button>' +
                     '<button type="button" title="Remove" class="btn btn-icon btn-outline-danger btn-xs border-0 remove-row"><span class="fa fa-trash"></span></button>' +
                 '</td>'+
             '</tr>');
             $('#items-table tbody').append(newRow);
-        });
+        }
         //======Remove ROW
         $('#items-table').on('click', '.remove-row', function() {
             $(this).closest('tr').remove();
-            var rec_qty= $('#rcvQty').val();
-            $('#rcvQty').val(rec_qty-1);
+
+            var rowCount = parseInt($('#items-table tbody tr td .add-row-btn').length);
+            if(rowCount < 1){
+                $('#item-add-btn').show();
+            }else{
+                $('#item-add-btn').hide();
+            }
         });
 
     </script>
+
     @endpush
 </x-app-layout>

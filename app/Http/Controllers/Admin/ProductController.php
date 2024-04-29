@@ -71,51 +71,59 @@ class ProductController extends Controller
     public function itemIndex($id)
     {
         $productCategory = ProductCategory::find($id);
-        $data = ProductItem::whereIn('status', [0, 1])->get();
+        $data = ProductItem::where('product_category_id', $id)->whereIn('status', [0, 1])->get();
 
         return view('layouts.pages.past-committee.member-index', compact('data', 'productCategory'));
     }
 
     public function itemStore(Request $request)
     {
-        // Validation Check 
+        $ingredients = collect($request->moreFile ?? [])
+            ->pluck('sub_item')
+            ->filter()
+            ->map(fn ($name) => ['name' => $name])
+            ->toArray();
+
+        // Validation
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            // 'file_path' => 'required|pdf|mimes:pdf|max:2048',
+            'file_path' => 'required_if:id,null|mimes:pdf|max:2048',
         ]);
 
-        // If validation fails, return error response
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $ingredient = [];
+        $productItem = $request->filled('id') ? ProductItem::findOrFail($request->id) : new ProductItem();
 
-        foreach ($request->moreFile ?? [] as $item) {
-            // Add ingredient only if 'sub_item' exists
-            if (isset($item['sub_item'])) {
-                $ingredient[] = ["name" => $item['sub_item']];
+        // Check if a file exists and is valid
+        if ($request->hasFile('file_path') && $request->file('file_path')->isValid()) {
+            // Delete the existing file if it exists
+            if ($productItem->file_path && File::exists(public_path("products/{$productItem->file_path}"))) {
+                File::delete(public_path("products/{$productItem->file_path}"));
             }
+
+            // Generate file name and move the new file
+            $fileName = $request->title . '.' . $request->file('file_path')->getClientOriginalExtension();
+            $filePath = $request->file('file_path')->move(public_path('products'), $fileName);
+        } elseif ($request->hasFile('file_path')) {
+            // If file is not valid, return error response
+            return response()->json(['error' => 'File upload failed.'], 500);
         }
 
-        //----Data Save
-        if(isset($request->id)){
-            $data = ProductItem::findOrFail($request->id);
-        }else{
-            $data = new ProductItem();
-        }
-        $data->title = $request->title;
-        $data->ingredient = json_encode($ingredient);
-        $data->file_path = $request->file_path;
-        $data->index = $request->index;
-        $data->product_category_id = $request->product_category_id;
-        $data->status = $request->status;
-        $data->user_id = Auth::user()->id;
-        $data->save();
+        $productItem->fill([
+            'title' => $request->title,
+            'ingredient' => json_encode($ingredients),
+            'file_path' => $fileName ?? $productItem->file_path, // Use existing file name if no new file uploaded
+            'index' => $request->index,
+            'product_category_id' => $request->product_category_id,
+            'status' => $request->status,
+            'user_id' => Auth::id(),
+        ])->save();
 
-        // Return success response with saved data
-        return response()->json($data);
+        return response()->json($productItem);
     }
+
 
     public function itemEdit(Request $request)
     {
@@ -129,9 +137,28 @@ class ProductController extends Controller
     {
         $data = ProductItem::findOrFail($request->id);
         $data->delete();
+
+        // Delete the existing file if it exists
+        if ($data->file_path && File::exists(public_path("products/{$data->file_path}"))) {
+            File::delete(public_path("products/{$data->file_path}"));
+        }
         
         // Return message
         return response()->json($data);
+    }
+
+
+    public function itemDownload($id)
+    {
+        $item = ProductItem::findOrFail($id);
+
+        $filePath = public_path('products/' . $item->file_path);
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath, $item->title . '.' . pathinfo($item->file_path, PATHINFO_EXTENSION));
+        }
+
+        abort(404, 'File not found');
     }
 
 

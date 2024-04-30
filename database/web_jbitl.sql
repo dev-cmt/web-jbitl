@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2023 at 10:23 AM
+-- Generation Time: Apr 30, 2024 at 12:55 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `web_bafiita`
+-- Database: `web_jbitl`
 --
 
 -- --------------------------------------------------------
@@ -44,6 +44,25 @@ CREATE TABLE `annual_fees` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `cover_photo` varchar(255) DEFAULT NULL,
+  `publish` date DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `source_url` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cards`
 --
 
@@ -56,31 +75,6 @@ CREATE TABLE `cards` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `committee_types`
---
-
-CREATE TABLE `committee_types` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `is_delete` tinyint(4) NOT NULL DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `committee_types`
---
-
-INSERT INTO `committee_types` (`id`, `name`, `description`, `user_id`, `status`, `is_delete`, `created_at`, `updated_at`) VALUES
-(1, 'Present Committee ', 'TEST DR - 1', 1, 1, 0, '2023-11-18 22:48:16', '2023-11-18 22:48:16'),
-(2, 'Past Committee', 'TEST DR - 2', 1, 1, 0, '2023-11-18 22:48:16', '2023-11-18 22:48:16');
 
 -- --------------------------------------------------------
 
@@ -200,14 +194,6 @@ CREATE TABLE `galleries` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `galleries`
---
-
-INSERT INTO `galleries` (`id`, `title`, `description`, `date`, `cover`, `drive_url`, `public`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Happy new year 2022', NULL, '2023-11-07', 'Motiur Rahman_1700378579.jpg', NULL, 1, 1, 1, '2023-11-19 01:23:02', '2023-11-19 01:23:02'),
-(2, 'Happy new year 2022', NULL, '2023-11-07', 'Motiur Rahman_1700378614.jpg', NULL, 1, 1, 1, '2023-11-19 01:23:37', '2023-11-19 01:23:37');
-
 -- --------------------------------------------------------
 
 --
@@ -222,235 +208,23 @@ CREATE TABLE `gallery_images` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `gallery_images`
---
-
-INSERT INTO `gallery_images` (`id`, `image`, `gallery_id`, `created_at`, `updated_at`) VALUES
-(1, 'pngegg (11)_1700378617.png', 2, '2023-11-19 01:23:37', '2023-11-19 01:23:37'),
-(2, 'pngegg (10)_1700378617.png', 2, '2023-11-19 01:23:37', '2023-11-19 01:23:37'),
-(3, 'Untitled-2-01_1700378617.png', 2, '2023-11-19 01:23:41', '2023-11-19 01:23:41'),
-(4, 'pngegg (9)_1700378621.png', 2, '2023-11-19 01:23:41', '2023-11-19 01:23:41'),
-(5, 'pngegg (7)_1700378621.png', 2, '2023-11-19 01:23:42', '2023-11-19 01:23:42');
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `info_academics`
+-- Table structure for table `gallery_videos`
 --
 
-CREATE TABLE `info_academics` (
+CREATE TABLE `gallery_videos` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `institute` varchar(255) DEFAULT NULL,
-  `mast_qualification_id` bigint(20) UNSIGNED NOT NULL,
-  `subject` varchar(255) DEFAULT NULL,
-  `passing_year` int(11) DEFAULT NULL,
-  `other_qualification` text DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `member_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `info_child_details`
---
-
-CREATE TABLE `info_child_details` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `child_name` varchar(255) DEFAULT NULL,
-  `child_dob` date DEFAULT NULL,
-  `child_gender` int(11) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `member_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `info_companies`
---
-
-CREATE TABLE `info_companies` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `company_name` varchar(255) DEFAULT NULL,
-  `company_email` varchar(255) DEFAULT NULL,
-  `company_phone` varchar(255) DEFAULT NULL,
-  `designation` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `web_url` varchar(255) DEFAULT NULL,
-  `is_job` tinyint(4) NOT NULL DEFAULT 0,
-  `is_business` tinyint(4) NOT NULL DEFAULT 0,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `member_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `info_documents`
---
-
-CREATE TABLE `info_documents` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `trade_licence` varchar(255) DEFAULT NULL,
-  `tin_certificate` varchar(255) DEFAULT NULL,
-  `nid_photo_copy` varchar(255) DEFAULT NULL,
-  `passport_photo` varchar(255) DEFAULT NULL,
-  `edu_certificate` varchar(255) DEFAULT NULL,
-  `experience_certificate` varchar(255) DEFAULT NULL,
-  `stu_id_copy` varchar(255) DEFAULT NULL,
-  `recoment_letter` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `member_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `info_others`
---
-
-CREATE TABLE `info_others` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `about_me` text DEFAULT NULL,
-  `nick_name` varchar(255) DEFAULT NULL,
-  `phone_number` varchar(255) DEFAULT NULL,
-  `cover_photo` varchar(255) DEFAULT NULL,
-  `favorite` varchar(255) DEFAULT NULL,
-  `facebook_url` varchar(255) DEFAULT NULL,
-  `youtube_url` varchar(255) DEFAULT NULL,
-  `instagram_url` varchar(255) DEFAULT NULL,
-  `twitter_url` varchar(255) DEFAULT NULL,
-  `linkedin_url` varchar(255) DEFAULT NULL,
-  `whatsapp_url` varchar(255) DEFAULT NULL,
-  `telegram_url` varchar(255) DEFAULT NULL,
-  `snapchat_url` varchar(255) DEFAULT NULL,
-  `tiktok_url` varchar(255) DEFAULT NULL,
-  `wechat_url` varchar(255) DEFAULT NULL,
-  `discord_url` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `member_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `info_personals`
---
-
-CREATE TABLE `info_personals` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `contact_number` varchar(255) DEFAULT NULL,
-  `nid_no` varchar(255) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
-  `father_name` varchar(255) DEFAULT NULL,
-  `mother_name` varchar(255) DEFAULT NULL,
-  `present_address` text DEFAULT NULL,
-  `parmanent_address` text DEFAULT NULL,
-  `gender` int(11) NOT NULL DEFAULT 0,
-  `blood_group` int(11) DEFAULT NULL,
-  `marrital_status` int(11) DEFAULT NULL,
-  `spouse` varchar(255) DEFAULT NULL,
-  `spouse_dob` date DEFAULT NULL,
-  `number_child` int(11) DEFAULT NULL,
-  `em_name` int(11) DEFAULT NULL,
-  `em_phone` int(11) DEFAULT NULL,
-  `em_rleation` int(11) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `member_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `info_students`
---
-
-CREATE TABLE `info_students` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `student_institute` varchar(255) DEFAULT NULL,
-  `semester` varchar(255) DEFAULT NULL,
-  `head_faculty_name` varchar(255) DEFAULT NULL,
-  `head_faculty_number` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `member_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mast_qualifications`
---
-
-CREATE TABLE `mast_qualifications` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `is_delete` tinyint(4) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `mast_qualifications`
---
-
-INSERT INTO `mast_qualifications` (`id`, `name`, `description`, `user_id`, `created_at`, `updated_at`, `status`, `is_delete`) VALUES
-(1, 'BSc in Architecture', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0),
-(2, 'Masters in any Discipline', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0),
-(3, 'BSc in Civil Engineering', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0),
-(4, 'BSc in Interior Architecture', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0),
-(5, 'Graduation in Any Discipline', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0),
-(6, 'Diploma in Civil Engineering', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0),
-(7, 'Diploma in Architecture', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0),
-(8, 'Diploma in Interior Design', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0),
-(9, 'Bachelor in fine arts', 'Admin Input', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16', 1, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `member_types`
---
-
-CREATE TABLE `member_types` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `prefix` varchar(255) DEFAULT NULL,
-  `registration_fee` decimal(10,2) DEFAULT NULL,
-  `monthly_fee` decimal(10,2) DEFAULT NULL,
-  `annual_fee` decimal(10,2) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `file_path` varchar(255) DEFAULT NULL,
+  `url` text DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
-  `is_delete` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `member_types`
---
-
-INSERT INTO `member_types` (`id`, `name`, `prefix`, `registration_fee`, `monthly_fee`, `annual_fee`, `description`, `user_id`, `status`, `is_delete`, `created_at`, `updated_at`) VALUES
-(1, 'Donor Member', '', 3000.00, 0.00, 4000.00, 'DR - 1', 1, 1, 0, '2023-11-18 22:48:16', '2023-11-18 22:48:16'),
-(2, 'General Member', 'A-', 2000.00, 0.00, 4000.00, 'DR - 2', 1, 1, 0, '2023-11-18 22:48:16', '2023-11-18 22:48:16');
 
 -- --------------------------------------------------------
 
@@ -477,28 +251,22 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2022_08_27_075954_create_sessions_table', 1),
 (7, '2022_09_08_043923_create_permission_tables', 1),
 (8, '2023_06_01_100000_create_contacts_table', 1),
-(9, '2023_07_01_000001_create_mast_qualifications_table', 1),
-(10, '2023_07_02_000001_create_member_types_table', 1),
-(11, '2023_07_02_000002_create_committee_types_table', 1),
-(12, '2023_08_01_000001_create_info_personals_table', 1),
-(13, '2023_08_01_000002_create_info_child_details_table', 1),
-(14, '2023_08_01_000003_create_info_academics_table', 1),
-(15, '2023_08_01_000004_create_info_students_table', 1),
-(16, '2023_08_01_000005_create_info_companies_table', 1),
-(17, '2023_08_01_000006_create_info_others_table', 1),
-(18, '2023_08_01_000008_create_info_documents_table', 1),
-(19, '2023_08_08_080000_create_fee_plans_table', 1),
-(20, '2023_08_08_090000_create_payment_reasons_table', 1),
-(21, '2023_08_08_090001_create_payment_methods_table', 1),
-(22, '2023_08_08_090002_create_payment_numbers_table', 1),
-(23, '2023_08_09_022210_create_transactions_table', 1),
-(24, '2023_08_09_022211_create_payment_details_table', 1),
-(25, '2023_08_09_022212_create_cards_table', 1),
-(26, '2023_08_09_100001_create_galleries_table', 1),
-(27, '2023_08_09_100002_create_gallery_images_table', 1),
-(28, '2023_08_09_100003_create_events_table', 1),
-(29, '2023_10_01_000000_create_event_registers_table', 1),
-(30, '2023_10_01_000001_create_annual_fees_table', 1);
+(9, '2023_08_08_080000_create_fee_plans_table', 1),
+(10, '2023_08_08_090000_create_payment_reasons_table', 1),
+(11, '2023_08_08_090001_create_payment_methods_table', 1),
+(12, '2023_08_08_090002_create_payment_numbers_table', 1),
+(13, '2023_08_09_022210_create_transactions_table', 1),
+(14, '2023_08_09_022211_create_payment_details_table', 1),
+(15, '2023_08_09_022212_create_cards_table', 1),
+(16, '2023_08_09_100001_create_galleries_table', 1),
+(17, '2023_08_09_100002_create_gallery_images_table', 1),
+(18, '2023_08_09_100003_create_events_table', 1),
+(19, '2023_10_01_000000_create_event_registers_table', 1),
+(20, '2023_10_01_000001_create_annual_fees_table', 1),
+(21, '2024_03_19_100001_create_blogs_table', 1),
+(22, '2024_04_24_055159_create_product_categories_table', 1),
+(23, '2024_04_24_055426_create_product_items_table', 1),
+(24, '2024_04_30_103533_create_gallery_videos_table', 1);
 
 -- --------------------------------------------------------
 
@@ -590,8 +358,12 @@ CREATE TABLE `payment_methods` (
 --
 
 INSERT INTO `payment_methods` (`id`, `name`, `image_path`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'bKash', 'bKash.png', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16'),
-(2, 'City-Bank', 'city-bank.png', 1, '2023-11-18 22:48:16', '2023-11-18 22:48:16');
+(1, 'bKash', 'bKash.png', 1, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(2, 'Rocket', 'Rocket.png', 1, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(3, 'Nagad', 'Nagad.png', 1, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(4, 'Upay', 'Upay.png', 1, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(5, 'City-Bank', 'city-bank.png', 1, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(6, 'Card', 'Card.png', 1, '2024-04-30 04:44:06', '2024-04-30 04:44:06');
 
 -- --------------------------------------------------------
 
@@ -633,9 +405,8 @@ CREATE TABLE `payment_reasons` (
 --
 
 INSERT INTO `payment_reasons` (`id`, `name`, `description`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Membership', NULL, 1, 0, '2023-11-18 22:48:16', '2023-11-18 22:48:16'),
-(2, 'Event', NULL, 1, 0, '2023-11-18 22:48:16', '2023-11-18 22:48:16'),
-(3, 'Annual', NULL, 1, 0, '2023-11-18 22:48:16', '2023-11-18 22:48:16');
+(1, 'Event', NULL, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(2, 'Annual', NULL, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06');
 
 -- --------------------------------------------------------
 
@@ -656,78 +427,72 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Member menu access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(2, 'Payment menu access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(3, 'Post menu access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(4, 'Setting menu access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(5, 'Member access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(6, 'Member edit', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(7, 'Member view', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(8, 'Member delete', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(9, 'Member approve access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(10, 'Member approved', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(11, 'Member approve record', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(12, 'CommitteeType access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(13, 'CommitteeType create', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(14, 'CommitteeType edit', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(15, 'CommitteeType view', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(16, 'CommitteeType delete', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(17, 'MemberType access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(18, 'MemberType create', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(19, 'MemberType edit', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(20, 'MemberType view', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(21, 'MemberType delete', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(22, 'Qualification access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(23, 'Qualification create', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(24, 'Qualification edit', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(25, 'Qualification view', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(26, 'Qualification delete', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(27, 'Annual fees access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(28, 'Annual fees approved', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(29, 'Annual fees record', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(30, 'Event fees access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(31, 'Event fees approved', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(32, 'Event fees record', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(33, 'Membership fees access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(34, 'Membership fees approved', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(35, 'Membership fees record', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(36, 'Pyment number access', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(37, 'Pyment number create', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(38, 'Pyment number edit', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(39, 'Pyment number view', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(40, 'Pyment number delete', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(41, 'Pyment fees access', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(42, 'Pyment annual fees', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(43, 'Pyment membership fees', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(44, 'Gallery access', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(45, 'Gallery create', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(46, 'Gallery edit', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(47, 'Gallery delete', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(48, 'Event access', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(49, 'Event create', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(50, 'Event edit', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(51, 'Event delete', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(52, 'Contact access', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(53, 'Contact reply', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(54, 'Contact delete', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(55, 'Role access', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(56, 'Role create', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(57, 'Role edit', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(58, 'Role delete', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(59, 'User access', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(60, 'User create', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(61, 'User edit', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(62, 'User delete', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(63, 'Super-Admin', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(64, 'Admin', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(65, 'Member', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(66, 'Data Setting', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(67, 'Student Member', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(68, 'Candidate Member', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(69, 'Professional Member', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(70, 'Associate Member', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(71, 'Trade Member', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15'),
-(72, 'Corporate Member', 'web', '2023-11-18 22:48:15', '2023-11-18 22:48:15');
+(1, 'Member menu access', 'web', '2024-04-30 04:44:04', '2024-04-30 04:44:04'),
+(2, 'Payment menu access', 'web', '2024-04-30 04:44:04', '2024-04-30 04:44:04'),
+(3, 'Post menu access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(4, 'Setting menu access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(5, 'Member access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(6, 'Member edit', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(7, 'Member view', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(8, 'Member delete', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(9, 'Member approve access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(10, 'Member approved', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(11, 'Member approve record', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(12, 'CommitteeType access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(13, 'CommitteeType create', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(14, 'CommitteeType edit', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(15, 'CommitteeType view', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(16, 'CommitteeType delete', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(17, 'MemberType access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(18, 'MemberType create', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(19, 'MemberType edit', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(20, 'MemberType view', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(21, 'MemberType delete', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(22, 'Qualification access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(23, 'Qualification create', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(24, 'Qualification edit', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(25, 'Qualification view', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(26, 'Qualification delete', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(27, 'Annual fees access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(28, 'Annual fees approved', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(29, 'Annual fees record', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(30, 'Event fees access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(31, 'Event fees approved', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(32, 'Event fees record', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(33, 'Membership fees access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(34, 'Membership fees approved', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(35, 'Membership fees record', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(36, 'Pyment number access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(37, 'Pyment number create', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(38, 'Pyment number edit', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(39, 'Pyment number view', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(40, 'Pyment number delete', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(41, 'Pyment fees access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(42, 'Pyment annual fees', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(43, 'Pyment membership fees', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(44, 'Gallery access', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(45, 'Gallery create', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(46, 'Gallery edit', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(47, 'Gallery delete', 'web', '2024-04-30 04:44:05', '2024-04-30 04:44:05'),
+(48, 'Event access', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(49, 'Event create', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(50, 'Event edit', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(51, 'Event delete', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(52, 'Contact access', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(53, 'Contact reply', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(54, 'Contact delete', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(55, 'Role access', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(56, 'Role create', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(57, 'Role edit', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(58, 'Role delete', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(59, 'User access', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(60, 'User create', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(61, 'User edit', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(62, 'User delete', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(63, 'Super-Admin', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(64, 'Admin', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(65, 'Member', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(66, 'Data Setting', 'web', '2024-04-30 04:44:06', '2024-04-30 04:44:06');
 
 -- --------------------------------------------------------
 
@@ -751,6 +516,61 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_categories`
+--
+
+CREATE TABLE `product_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `index` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_categories`
+--
+
+INSERT INTO `product_categories` (`id`, `code`, `title`, `description`, `icon`, `user_id`, `status`, `index`, `created_at`, `updated_at`) VALUES
+(1, '1000', 'AE water reducing agent', 'It is a good AE water reducer mainly composed of lignin and increases the durability of concrete.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(2, '2000', 'High performance AE water reducing agent', 'It has high water reduction performance and good slump loss reduction effect.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(3, '3000', 'High performance water reducing agent', 'It has effective high water reduction performance and can be used for concrete products with low water-cement ratios that do not require air entrainment.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(4, '4000', 'Fluidizer', 'It is suitable for improving the fluidity of concrete on site and for producing underwater concrete.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(5, '5000', 'Water reducing agent', 'Suitable for factory-manufactured concrete products, moderate water reduction and good surface finish can be expected.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(6, '6000', 'Curing accelerator', 'Effective for concrete construction in winter when freezing is a concern.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(7, '7000', 'Shrinkage reducing agent', 'Effective in reducing drying shrinkage, which causes cracks in concrete.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(8, '8000', 'AE agent/air volume control agent', 'Admixture for entraining air in concrete.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06'),
+(9, '9000', 'Admixtures for special applications', 'We offer a wide range of admixtures for different types of concrete.', 'mdi mdi-chemical-weapon', 1, 1, 0, '2024-04-30 04:44:06', '2024-04-30 04:44:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_items`
+--
+
+CREATE TABLE `product_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `file_path` varchar(255) DEFAULT NULL,
+  `ingredient` text DEFAULT NULL,
+  `product_category_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `index` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `roles`
 --
 
@@ -767,9 +587,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Super-Admin', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(2, 'Admin', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14'),
-(3, 'Member', 'web', '2023-11-18 22:48:14', '2023-11-18 22:48:14');
+(1, 'Super-Admin', 'web', '2024-04-30 04:44:04', '2024-04-30 04:44:04'),
+(2, 'Admin', 'web', '2024-04-30 04:44:04', '2024-04-30 04:44:04'),
+(3, 'Member', 'web', '2024-04-30 04:44:04', '2024-04-30 04:44:04');
 
 -- --------------------------------------------------------
 
@@ -854,13 +674,7 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (64, 1),
 (65, 1),
 (65, 2),
-(66, 1),
-(67, 1),
-(68, 1),
-(69, 1),
-(70, 1),
-(71, 1),
-(72, 1);
+(66, 1);
 
 -- --------------------------------------------------------
 
@@ -882,10 +696,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('NErDAbJnxlOMPs70KWu7OtiKlWdcf7sAX96JKncj', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT3ZkN2dVWTVBZThreERCR1RGZ1l5S3NlMGRvUUo0OFNyWlEzM0V3dCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9sb2NhbGhvc3QvQkFGSUlUQS9wYWdlcy9jb250YWN0LXVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1700471677),
-('pWu5nHIFYBGvLxv8Q15cC5HazFRy1NIQDIBmNkqK', NULL, '192.168.10.16', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOVFaVHFrY0UzbU00ZFNCUXgwamRuWUxEaHZ6TzNITlhVdmplcUpoTSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xOTIuMTY4LjEwLjE4L2JhZmlpdGEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1700459358),
-('URppeG9tVIyjv3BKwtaiKIMn6Ur3jRHnccsyFiAD', NULL, '192.168.10.16', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTG9tR2szRHpWS2RkNWVERTZveHB2eWRKTW55ZEN0WnNUSnJqMDJGNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xOTIuMTY4LjEwLjE4L2JhZmlpdGEiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1700466774),
-('WbnRVqWmXgo2B0yKyvxeKGZ6uGMM3QQfXoNtrHPl', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaExSMUdrVVFwa2hIZ3VDTnVmQVBCc1o3Yk9jd2JlcmJTZ1dGYUMyMiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly9sb2NhbGhvc3QvQkFGSUlUQS9wYWdlcy8xL2Fib3V0LW1lc3NhZ2UiO319', 1700466750);
+('KO2iwfCVJV0x3S3SuOblckPw5gTPiyUdKSh48kC6', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiRGw4UDdtZjBLa3pwUmlFSmZtVTVwTUR6WURPbWdETkRNVWFQRE1OZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9sb2NhbGhvc3Qvd2ViLWpiaXRsL3BhZ2VzL2Fib3V0LXVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1714474246);
 
 -- --------------------------------------------------------
 
@@ -915,7 +726,7 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `member_code` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `two_factor_secret` text DEFAULT NULL,
@@ -924,11 +735,9 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) DEFAULT NULL,
   `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
   `profile_photo_path` varchar(255) DEFAULT NULL,
-  `member_type_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `committee_type_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `is_admin` tinyint(4) NOT NULL DEFAULT 0,
   `approve_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `is_admin` tinyint(4) NOT NULL DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
   `index` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -938,9 +747,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `member_code`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `member_type_id`, `committee_type_id`, `status`, `is_admin`, `approve_by`, `index`, `created_at`, `updated_at`) VALUES
-(1, 'IDAB', 'Admin', 'IDAB-ADMIN', '2021-12-31 18:00:00', '$2y$10$1e/IcxG7C0d6DrIALq5vu.7GJXWNmYsbkEnnMlK4EZkp/SDKM.rU.', NULL, NULL, NULL, NULL, NULL, 'fix/admin.jpg', NULL, NULL, 1, 1, NULL, NULL, '2023-11-18 22:48:13', '2023-11-18 22:48:13'),
-(2, 'Member', 'member@gmail.com', 'IDAB-00000', '1999-12-31 18:00:00', '$2y$10$z8Kn3CJ7pjTPxEmXEl5t1uXBFCrbBRIWjf175MDo2PZ9BNyMdmlpC', NULL, NULL, NULL, NULL, NULL, 'fix/member.jpg', NULL, NULL, 1, 1, NULL, NULL, '2023-11-18 22:48:13', '2023-11-18 22:48:13');
+INSERT INTO `users` (`id`, `name`, `email`, `code`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `approve_by`, `is_admin`, `status`, `index`, `created_at`, `updated_at`) VALUES
+(1, 'JBITL', 'Admin', 'JBITL-ADMIN', '2024-04-30 04:44:04', '$2y$10$dRUcVmToYgukxbvyy5vGO.JUIXX4j83rxGeSKNvgh7x5oY0hpanIS', NULL, NULL, NULL, NULL, NULL, 'fix/admin.jpg', NULL, 1, 1, NULL, '2024-04-30 04:44:04', '2024-04-30 04:44:04'),
+(2, 'Member', 'member@gmail.com', 'BAFIITA-MEMBER', '2024-04-30 04:44:04', '$2y$10$93Y.BDHQtfQomvSa.6fyu.KSNh/SEz3Gh2rcnLLhnryApDnSIYar2', NULL, NULL, NULL, NULL, NULL, 'fix/member.jpg', NULL, 1, 1, NULL, '2024-04-30 04:44:04', '2024-04-30 04:44:04');
 
 --
 -- Indexes for dumped tables
@@ -955,18 +764,18 @@ ALTER TABLE `annual_fees`
   ADD KEY `annual_fees_member_id_foreign` (`member_id`);
 
 --
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `blogs_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `cards`
 --
 ALTER TABLE `cards`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cards_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `committee_types`
---
-ALTER TABLE `committee_types`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `committee_types_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `contacts`
@@ -1017,68 +826,11 @@ ALTER TABLE `gallery_images`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `info_academics`
+-- Indexes for table `gallery_videos`
 --
-ALTER TABLE `info_academics`
+ALTER TABLE `gallery_videos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `info_academics_mast_qualification_id_foreign` (`mast_qualification_id`),
-  ADD KEY `info_academics_member_id_foreign` (`member_id`);
-
---
--- Indexes for table `info_child_details`
---
-ALTER TABLE `info_child_details`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `info_child_details_member_id_foreign` (`member_id`);
-
---
--- Indexes for table `info_companies`
---
-ALTER TABLE `info_companies`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `info_companies_member_id_foreign` (`member_id`);
-
---
--- Indexes for table `info_documents`
---
-ALTER TABLE `info_documents`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `info_documents_member_id_foreign` (`member_id`);
-
---
--- Indexes for table `info_others`
---
-ALTER TABLE `info_others`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `info_others_member_id_foreign` (`member_id`);
-
---
--- Indexes for table `info_personals`
---
-ALTER TABLE `info_personals`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `info_personals_member_id_foreign` (`member_id`);
-
---
--- Indexes for table `info_students`
---
-ALTER TABLE `info_students`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `info_students_member_id_foreign` (`member_id`);
-
---
--- Indexes for table `mast_qualifications`
---
-ALTER TABLE `mast_qualifications`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `mast_qualifications_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `member_types`
---
-ALTER TABLE `member_types`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `member_types_user_id_foreign` (`user_id`);
+  ADD KEY `gallery_videos_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `migrations`
@@ -1154,6 +906,23 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_categories_code_unique` (`code`),
+  ADD KEY `product_categories_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `product_items`
+--
+ALTER TABLE `product_items`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_items_code_unique` (`code`),
+  ADD KEY `product_items_product_category_id_foreign` (`product_category_id`),
+  ADD KEY `product_items_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -1201,16 +970,16 @@ ALTER TABLE `annual_fees`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cards`
 --
 ALTER TABLE `cards`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `committee_types`
---
-ALTER TABLE `committee_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contacts`
@@ -1246,73 +1015,25 @@ ALTER TABLE `fee_plans`
 -- AUTO_INCREMENT for table `galleries`
 --
 ALTER TABLE `galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gallery_images`
 --
 ALTER TABLE `gallery_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `info_academics`
---
-ALTER TABLE `info_academics`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `info_child_details`
+-- AUTO_INCREMENT for table `gallery_videos`
 --
-ALTER TABLE `info_child_details`
+ALTER TABLE `gallery_videos`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `info_companies`
---
-ALTER TABLE `info_companies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `info_documents`
---
-ALTER TABLE `info_documents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `info_others`
---
-ALTER TABLE `info_others`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `info_personals`
---
-ALTER TABLE `info_personals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `info_students`
---
-ALTER TABLE `info_students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `mast_qualifications`
---
-ALTER TABLE `mast_qualifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `member_types`
---
-ALTER TABLE `member_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `payment_details`
@@ -1324,7 +1045,7 @@ ALTER TABLE `payment_details`
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `payment_numbers`
@@ -1336,18 +1057,30 @@ ALTER TABLE `payment_numbers`
 -- AUTO_INCREMENT for table `payment_reasons`
 --
 ALTER TABLE `payment_reasons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `product_items`
+--
+ALTER TABLE `product_items`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -1380,16 +1113,16 @@ ALTER TABLE `annual_fees`
   ADD CONSTRAINT `annual_fees_payment_details_id_foreign` FOREIGN KEY (`payment_details_id`) REFERENCES `payment_details` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD CONSTRAINT `blogs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `cards`
 --
 ALTER TABLE `cards`
   ADD CONSTRAINT `cards_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `committee_types`
---
-ALTER TABLE `committee_types`
-  ADD CONSTRAINT `committee_types_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `events`
@@ -1412,59 +1145,10 @@ ALTER TABLE `galleries`
   ADD CONSTRAINT `galleries_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `info_academics`
+-- Constraints for table `gallery_videos`
 --
-ALTER TABLE `info_academics`
-  ADD CONSTRAINT `info_academics_mast_qualification_id_foreign` FOREIGN KEY (`mast_qualification_id`) REFERENCES `mast_qualifications` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `info_academics_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `info_child_details`
---
-ALTER TABLE `info_child_details`
-  ADD CONSTRAINT `info_child_details_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `info_companies`
---
-ALTER TABLE `info_companies`
-  ADD CONSTRAINT `info_companies_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `info_documents`
---
-ALTER TABLE `info_documents`
-  ADD CONSTRAINT `info_documents_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `info_others`
---
-ALTER TABLE `info_others`
-  ADD CONSTRAINT `info_others_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `info_personals`
---
-ALTER TABLE `info_personals`
-  ADD CONSTRAINT `info_personals_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `info_students`
---
-ALTER TABLE `info_students`
-  ADD CONSTRAINT `info_students_member_id_foreign` FOREIGN KEY (`member_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `mast_qualifications`
---
-ALTER TABLE `mast_qualifications`
-  ADD CONSTRAINT `mast_qualifications_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `member_types`
---
-ALTER TABLE `member_types`
-  ADD CONSTRAINT `member_types_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+ALTER TABLE `gallery_videos`
+  ADD CONSTRAINT `gallery_videos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `model_has_permissions`
@@ -1500,6 +1184,19 @@ ALTER TABLE `payment_numbers`
 --
 ALTER TABLE `payment_reasons`
   ADD CONSTRAINT `payment_reasons_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD CONSTRAINT `product_categories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_items`
+--
+ALTER TABLE `product_items`
+  ADD CONSTRAINT `product_items_product_category_id_foreign` FOREIGN KEY (`product_category_id`) REFERENCES `product_categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_items_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `role_has_permissions`

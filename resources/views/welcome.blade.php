@@ -96,7 +96,7 @@
                 data-animation-out="fadeOut">
                 <!-- Services Creative-->
                 <article class="services-creative">
-                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/frontend')}}/images/services/our-products.jpg" alt="" width="370" height="230" /></a>
+                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/images')}}/services/our-products.jpg" alt="" width="370" height="230" /></a>
                     <div class="services-creative-caption">
                         <h5 class="services-creative-title"><a href="single-service.html">Our Products</a></h5>
                         <p class="services-creative-text description_3">JBITL offers ECO 5000 for concrete Brick technology and FLAT PLAG JBITL for dampproof roof and wall. In addition to eco-friendly bricks, JBITL also offers a range of sustainable construction materials such as insulation, roofing materials, and flooring options.</p>
@@ -105,7 +105,7 @@
                 </article>
                 <!-- Services Creative-->
                 <article class="services-creative">
-                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/frontend')}}/images/services/eco-5000.jpg" alt="" width="370" height="230" /></a>
+                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/images')}}/services/eco-5000.jpg" alt="" width="370" height="230" /></a>
                     <div class="services-creative-caption">
                         <h5 class="services-creative-title"><a href="single-service.html">What is ECO 5000?</a></h5>
                         <p class="services-creative-text description_3">ECO-5000 is a unique chemical treatment specially formulated to improve the durability of reinforced concrete structures exposed to harsh conditions. This additive is added to the concrete mix at the time of batching to provide a range of features and benefits.</p>
@@ -114,7 +114,7 @@
                 </article>
                 <!-- Services Creative-->
                 <article class="services-creative">
-                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/frontend')}}/images/services/project-planning.jpg" alt="" width="370" height="230" /></a>
+                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/images')}}/services/project-planning.jpg" alt="" width="370" height="230" /></a>
                     <div class="services-creative-caption">
                         <h5 class="services-creative-title"><a href="single-service.html">Consulting Services</a></h5>
                         <p class="services-creative-text description_3">JBITL also offers consulting services to help construction companies and developers make the switch to more sustainable and eco-friendly construction practices. JBITL team of experts can provide guidance on everything from raw material selection to installation and maintenance.</p>
@@ -123,7 +123,7 @@
                 </article>
                 <!-- Services Creative-->
                 <article class="services-creative">
-                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/frontend')}}/images/services/value-engineering.jpg" alt="" width="370" height="230" /></a>
+                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/images')}}/services/value-engineering.jpg" alt="" width="370" height="230" /></a>
                     <div class="services-creative-caption">
                         <h5 class="services-creative-title"><a href="single-service.html">Value Engineering</a></h5>
                         <p class="services-creative-text description_3">Value engineering is used to solve problems and eliminate any unwanted costs.</p>
@@ -132,7 +132,7 @@
                 </article>
                 <!-- Services Creative-->
                 <article class="services-creative">
-                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/frontend')}}/images/services/quality-control.jpg" alt="" width="370" height="230" /></a>
+                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/images')}}/services/quality-control.jpg" alt="" width="370" height="230" /></a>
                     <div class="services-creative-caption">
                         <h5 class="services-creative-title"><a href="single-service.html">Quality Control</a></h5>
                         <p class="services-creative-text description_3">We control the quality of all our projects, especially the most complex ones.</p>
@@ -161,123 +161,33 @@
     </section>
 
     <!-- Mining machinery-->
+    @if (!empty($gallery))
     <section class="section section-xl bg-default text-center">
         <div class="container">
             <h3 class="oh-desktop"><span class="d-inline-block wow slideInUp">OUR Gallery</span></h3>
         </div>
         <div class="container-fluid container-inset-0">
             <div class="row row-30 row-desktop-8 gutters-8 hoverdir" data-lightgallery="group">
+                @foreach ($gallery as $row)
                 <div class="col-sm-6 col-lg-4 col-xxl-3">
                     <div class="oh-desktop">
                         <!-- Thumbnail Modern-->
                         <article class="thumbnail thumbnail-modern wow slideInUp hoverdir-item" data-hoverdir-target=".thumbnail-modern-caption">
-                            <a class="thumbnail-modern-figure" href="{{asset('public/frontend')}}/images/project-11-1200x800-original.jpg" data-lightgallery="item">
-                                <img src="{{asset('public/frontend')}}/images/grid-gallery-1-474x355.jpg" alt="" width="474" height="355" />
+                            <a class="thumbnail-modern-figure" href="{{asset('public/images')}}/gallery/{{ $row->cover }}" data-lightgallery="item">
+                                <img src="{{asset('public/images')}}/gallery/{{ $row->cover }}" alt="" width="474" height="355" />
                             </a>
                             <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">Smith office Center</a></h5>
+                                <h5 class="thumbnail-modern-title"><a href="{{route('page.gallery-show', $row ->id)}}">JBITL</a></h5>
                             </div>
                         </article>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-modern wow slideInDown hoverdir-item"
-                            data-hoverdir-target=".thumbnail-modern-caption"><a class="thumbnail-modern-figure"
-                                href="{{asset('public/frontend')}}/images/grid-gallery-2-1200x800-original.jpg" data-lightgallery="item"><img
-                                    src="{{asset('public/frontend')}}/images/grid-gallery-2-474x355.jpg" alt="" width="474" height="355" /></a>
-                            <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">Deltatrans
-                                        Warehouse</a></h5>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-modern wow slideInUp hoverdir-item"
-                            data-hoverdir-target=".thumbnail-modern-caption"><a class="thumbnail-modern-figure"
-                                href="{{asset('public/frontend')}}/images/project-3-1200x800-original.jpg" data-lightgallery="item"><img
-                                    src="{{asset('public/frontend')}}/images/grid-gallery-3-474x355.jpg" alt="" width="474" height="355" /></a>
-                            <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">fitpower Gym</a></h5>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-modern wow slideInDown hoverdir-item"
-                            data-hoverdir-target=".thumbnail-modern-caption"><a class="thumbnail-modern-figure"
-                                href="{{asset('public/frontend')}}/images/grid-gallery-3-1200x800-original.jpg" data-lightgallery="item"><img
-                                    src="{{asset('public/frontend')}}/images/grid-gallery-4-474x355.jpg" alt="" width="474" height="355" /></a>
-                            <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">Beyer Concert
-                                        Hall</a></h5>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-modern wow slideInDown hoverdir-item"
-                            data-hoverdir-target=".thumbnail-modern-caption"><a class="thumbnail-modern-figure"
-                                href="{{asset('public/frontend')}}/images/project-13-1200x800-original.jpg" data-lightgallery="item"><img
-                                    src="{{asset('public/frontend')}}/images/grid-gallery-5-474x355.jpg" alt="" width="474" height="355" /></a>
-                            <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">Graham Bridge</a>
-                                </h5>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-modern wow slideInUp hoverdir-item"
-                            data-hoverdir-target=".thumbnail-modern-caption"><a class="thumbnail-modern-figure"
-                                href="{{asset('public/frontend')}}/images/project-14-1200x800-original.jpg" data-lightgallery="item"><img
-                                    src="{{asset('public/frontend')}}/images/grid-gallery-6-474x355.jpg" alt="" width="474" height="355" /></a>
-                            <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">Dallas Art Park</a>
-                                </h5>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-modern wow slideInDown hoverdir-item"
-                            data-hoverdir-target=".thumbnail-modern-caption"><a class="thumbnail-modern-figure"
-                                href="{{asset('public/frontend')}}/images/project-6-1200x800-original.jpg" data-lightgallery="item"><img
-                                    src="{{asset('public/frontend')}}/images/grid-gallery-7-474x355.jpg" alt="" width="474" height="355" /></a>
-                            <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">wilson co. Headquarters</a></h5>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xxl-3">
-                    <div class="oh-desktop">
-                        <!-- Thumbnail Modern-->
-                        <article class="thumbnail thumbnail-modern wow slideInUp hoverdir-item"
-                            data-hoverdir-target=".thumbnail-modern-caption"><a class="thumbnail-modern-figure"
-                                href="{{asset('public/frontend')}}/images/grid-gallery-8-1200x800-original.jpg" data-lightgallery="item"><img
-                                    src="{{asset('public/frontend')}}/images/grid-gallery-8-474x355.jpg" alt="" width="474" height="355" /></a>
-                            <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">Abington University</a></h5>
-                            </div>
-                        </article>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Latest Project-->
     <section class="section section-inset-8 bg-image-5 context-dark text-center">
@@ -375,13 +285,13 @@
                                 data-for=".carousel-parent" data-items="4" data-sm-items="4" data-md-items="4"
                                 data-lg-items="4" data-xl-items="4" data-slide-to-scroll="1">
                                 <div class="item">
-                                    <img class="img-circle" src="{{asset('public/frontend')}}/images/clients/Md.-Ruhul-Amin.jpg" alt="" width="83" height="83" />
+                                    <img class="img-circle" src="{{asset('public/images')}}/clients/Md.-Ruhul-Amin.jpg" alt="" width="83" height="83" />
                                 </div>
                                 <div class="item">
-                                    <img class="img-circle" src="{{asset('public/frontend')}}/images/clients/Warash-Hossain.jpg" alt="" width="83" height="83" />
+                                    <img class="img-circle" src="{{asset('public/images')}}/clients/Warash-Hossain.jpg" alt="" width="83" height="83" />
                                 </div>
                                 <div class="item">
-                                    <img class="img-circle" src="{{asset('public/frontend')}}/images/clients/Md.-Alamgir.jpg" alt="" width="83" height="83" />
+                                    <img class="img-circle" src="{{asset('public/images')}}/clients/Md.-Alamgir.jpg" alt="" width="83" height="83" />
                                 </div>
                             </div>
                         </div>

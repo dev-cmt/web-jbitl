@@ -1,7 +1,7 @@
 <!-- Swiper-->
 <section class="section swiper-container swiper-slider swiper-slider-2" data-swiper='{"autoplay":{"delay":5000},"effect":"fade","loop":"true","simulateTouch":"false","pagination":{"el":".swiper-pagination","clickable":true}}'>
     <div class="swiper-wrapper text-sm-left">
-        <div class="swiper-slide context-dark" data-slide-bg="{{asset('public/frontend')}}/images/slide/slide-1-1920x753.jpg">
+        <div class="swiper-slide context-dark" data-slide-bg="{{asset('public/images')}}/slide/slide-1-1920x753.jpg">
             <div class="swiper-slide-caption section-md">
                 <div class="container">
                     <div class="row">

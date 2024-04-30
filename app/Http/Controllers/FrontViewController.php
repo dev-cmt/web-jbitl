@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Contact;
 use App\Models\Admin\Gallery;
 use App\Models\Admin\GalleryImages;
+use App\Models\Admin\GalleryVideo;
 use App\Models\Admin\Event;
 use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductItem;
@@ -18,12 +19,11 @@ class FrontViewController extends Controller
     public function welcome()
     {
         $user = User::where('status', 1)->get();
-        $add_hoc = $user->where('committee_type_id', 1);
-        $executive = $user->where('committee_type_id', 2);
+        $gallery = Gallery::where('status', 1)->get();
         $event = Event::where('status', 1)->get();
         $contact = Contact::where('status', 1)->get();
 
-        return view('welcome', compact('user', 'add_hoc', 'executive', 'event', 'contact'));
+        return view('welcome', compact('user', 'gallery', 'event', 'contact'));
     }
     /**________________________________________________________________________________________
      * Products Menu Pages
@@ -85,14 +85,19 @@ class FrontViewController extends Controller
     public function galleryImage()
     {
         $posts= Gallery::where('public','=','1')->orderBy('created_at', 'desc')->with('user')->get();
-        return view('frontend.pages.gallery_album', compact('posts'));
+        return view('frontend.pages.gallery-album', compact('posts'));
     }
     public function galleryShow($id)
     {
         $posts= Gallery::findOrFail($id);
         $data= GalleryImages::where('gallery_id', $id)->orderBy('created_at', 'desc')->get();
         
-        return view('frontend.pages.gallery_image', compact('posts', 'data'));
+        return view('frontend.pages.gallery-image', compact('posts', 'data'));
+    }
+    public function galleryVideo()
+    {
+        $data = GalleryVideo::where('status', '1')->orderBy('created_at', 'desc')->get();
+        return view('frontend.pages.gallery-video', compact('data'));
     }
     /**________________________________________________________________________________________
      * Events Menu Pages

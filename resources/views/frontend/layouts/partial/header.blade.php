@@ -41,7 +41,7 @@
                         <!-- RD Navbar Toggle-->
                         <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                         <!-- RD Navbar Brand-->
-                        <div class="rd-navbar-brand"><a class="brand" href="index.html"><img class="brand-logo-dark" src="{{asset('public/frontend')}}/images/cropped-logo-2-1536x554.png" alt="" width="219" height="39" /></a></div>
+                        <div class="rd-navbar-brand"><a class="brand" href="index.html"><img class="brand-logo-dark" src="{{asset('public/images')}}/logo.png" alt="" width="219" height="39" /></a></div>
                     </div>
                     <div class="rd-navbar-right rd-navbar-nav-wrap">
                         <div class="rd-navbar-aside d-xl-none">

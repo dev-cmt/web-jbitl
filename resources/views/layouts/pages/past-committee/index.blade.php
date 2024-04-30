@@ -19,6 +19,7 @@
                     </div>
                     <div class="card-body">
                         <h6>{{$row->title}}</h6>
+                        <p>{{$row->description}}</p>
                     </div>
                     <div class="card-footer">
                         @if($row->status == 0)
@@ -30,6 +31,10 @@
                             <i class="fa fa-circle text-success mr-1"></i> Active
                         </span>
                         @endif
+
+                        <span class="badge light badge-info float-right">
+                            Category-Code: <strong>{{$row->code}}</strong>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -150,15 +155,22 @@
                                 </div>
                                 <div class="card-body">
                                     <h6>${response.title}</h6>
+                                    <p>${response.description}</p>
                                 </div>
-                                <div class="card-footer">${statusHtml}</div>
+                                <div class="card-footer">
+                                    ${statusHtml}
+                                    <span class="badge light badge-info float-right">
+                                        Category-Code: <strong>${response.code}</strong>
+                                    </span>
+                                </div>
+                                
                             </div>
                         </div>`;
 
                     if ($("#set_id").val()) { 
                         $("#col_" + response.id).replaceWith(newRowHtml); 
                     } else { 
-                        $("#content-section").prepend(newRowHtml); 
+                        $("#content-section").append(newRowHtml); 
                     }
                 },
                 error: function(xhr) {

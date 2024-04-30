@@ -31,12 +31,9 @@ class ProductController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
+
         //----Data Save
-        if(isset($request->id)){
-            $data = ProductCategory::findOrFail($request->id);
-        }else{
-            $data = new ProductCategory();
-        }
+        $data = $request->id ? ProductCategory::findOrFail($request->id) : new ProductCategory();
         $data->title = $request->title;
         $data->icon = $request->icon;
         $data->description = $request->description;
@@ -98,20 +95,28 @@ class ProductController extends Controller
 
         // Check if a file exists and is valid
         if ($request->hasFile('file_path') && $request->file('file_path')->isValid()) {
-            // Delete the existing file if it exists
             if ($productItem->file_path && File::exists(public_path("products/{$productItem->file_path}"))) {
                 File::delete(public_path("products/{$productItem->file_path}"));
             }
-
-            // Generate file name and move the new file
             $fileName = $request->title . '.' . $request->file('file_path')->getClientOriginalExtension();
             $filePath = $request->file('file_path')->move(public_path('products'), $fileName);
         } elseif ($request->hasFile('file_path')) {
-            // If file is not valid, return error response
             return response()->json(['error' => 'File upload failed.'], 500);
         }
 
+        // Get the product category code
+        $categoryCode = ProductCategory::findOrFail($request->product_category_id)->code;
+
+        if (ProductItem::where('product_category_id', $request->product_category_id)->exists()) {
+            $lastItem = ProductItem::where('product_category_id', $request->product_category_id)->orderBy('code', 'desc')->first();
+            $lastCode = ($lastItem) ? $lastItem->code : 0;
+            $nextCode = $lastCode + 1; 
+        } else {
+            $nextCode = $categoryCode + 1;
+        }
+
         $productItem->fill([
+            'code' => $nextCode ?? null,
             'title' => $request->title,
             'ingredient' => json_encode($ingredients),
             'file_path' => $fileName ?? $productItem->file_path, // Use existing file name if no new file uploaded

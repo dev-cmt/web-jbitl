@@ -62,8 +62,9 @@
         @else
             @include('frontend.layouts.partial.banner')
         @endif
-    
+
         @yield('content')
+        
         @include('frontend.layouts.partial.footer')
     </div>
 
@@ -72,6 +73,17 @@
     <!-- Javascript-->
     <script src="{{asset('public/frontend')}}/js/core.min.js"></script>
     <script src="{{asset('public/frontend')}}/js/script.js"></script>
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-7078796-5']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 
     @yield('script')
 </body>

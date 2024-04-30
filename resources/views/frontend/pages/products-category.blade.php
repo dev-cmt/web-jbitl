@@ -8,11 +8,13 @@
                 @foreach ($data as $row)
                 <div class="col-sm-6 col-lg-4">
                     <div class="services-modern">
-                        <div class="box-icon-modern-icon mdi mdi-chemical-weapon mb-4"></div>
+                        <div class="box-icon-modern-icon {{$row->icon}} "></div>
+                        <p class="text-info mb-4">Catgory-Code: <strong>{{$row->code}}</strong></p>
+
                         <article class="box-icon-modern">
-                            <h5 class="box-icon-modern-title"><a href="{{route('page.products-item')}}">{{$row->title}}</a></h5>
-                            <p class="box-icon-modern-text">It is a good AE water reducer mainly composed of lignin and increases the durability of concrete.</p>
-                            <a class="box-icon-modern-link" href="{{route('page.products-item')}}">Read More<span class="icon mdi mdi-arrow-right"></span></a>
+                            <h5 class="box-icon-modern-title"><a href="{{route('page.products-item', $row->id)}}">{{$row->title}}</a></h5>
+                            <p class="box-icon-modern-text">{{$row->description}}</p>
+                            <a class="box-icon-modern-link" href="{{route('page.products-item', $row->id)}}">Read More<span class="icon mdi mdi-arrow-right"></span></a>
                         </article>
                     </div>
                 </div>

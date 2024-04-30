@@ -44,7 +44,7 @@ Route::get('/', [FrontViewController::class, 'welcome'])->name('/');
 Route::get('comming/soon', [FrontViewController::class, 'welcome'])->name('comming_soon');
 //______________ PRODUCT
 Route::get('pages/products-category', [FrontViewController::class, 'productCategory'])->name('page.products-category');
-Route::get('pages/products-item', [FrontViewController::class, 'productItem'])->name('page.products-item');
+Route::get('pages/{id}/products-item', [FrontViewController::class, 'productItem'])->name('page.products-item');
 
 Route::get('pages/registered-product', [FrontViewController::class, 'registeredProduct'])->name('page.registered-product');
 //______________ INFORMATION
@@ -75,6 +75,15 @@ Route::get('pages/career', [FrontViewController::class, 'career'])->name('page.c
 Route::get('pages/terms-condition', [FrontViewController::class, 'termsCondition'])->name('page.terms-condition');
 Route::get('pages/privacy-policy', [FrontViewController::class,'privacyPolicy'])->name('page.privacy-policy');
 
+//______________ DWONLAD
+Route::get('pages/download-profile', function () {
+    $filePath = public_path('document/profile.pdf');
+    return response()->download($filePath, 'profile.pdf');
+})->name('page.download-profile');
+Route::get('pages/download-product', function () {
+    $filePath = public_path('document/product.pdf');
+    return response()->download($filePath, 'product.pdf');
+})->name('page.download-product');
 
 
 /**______________________________________________________________________________________________

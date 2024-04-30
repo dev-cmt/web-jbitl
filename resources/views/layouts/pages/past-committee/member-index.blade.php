@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <article class="products-item">
+                    <p class="mb-3 text-info">Product Code: <strong>{{$row->code}}</strong></p>
                     <h5><i class="mdi mdi-forward"></i>{{ $row->title }}</h5>
-                    
                     @if(isset($row->ingredient))
                         @php
                             $ingredients = json_decode($row->ingredient, true);
@@ -31,7 +31,7 @@
                         <p>Main Ingredient</p>
                         <ul>
                             @foreach ($ingredients as $ingredient)
-                                <li><i class="mdi mdi-check-all"></i>{{ $ingredient['name'] }}</li>
+                                <li><i class="mdi mdi-check-all"></i> {{ $ingredient['name'] }}</li>
                             @endforeach
                         </ul>
                     @endif
@@ -188,12 +188,13 @@
                         '</div>' +
                     '</div>' +
                     '<article class="products-item">' +
+                        '<p class="mb-3 text-info">Product Code: <strong>' + response.code + '</strong></p>' +
                         '<h5><i class="mdi mdi-forward"></i>' + response.title + '</h5>' +
                         '<p>Main Ingredient</p>' +
                         '<ul>';
                         var ingredients = JSON.parse(response.ingredient);
                         ingredients.forEach(function(ingredient) {
-                            newRowHtml += '<li><i class="mdi mdi-check-all"></i>' + ingredient.name + '</li>';
+                            newRowHtml += '<li><i class="mdi mdi-check-all"></i> ' + ingredient.name + '</li>';
                         });
 
                         newRowHtml += '</ul>' +
@@ -206,7 +207,7 @@
                     if ($("#set_id").val()) { 
                         $("#col_" + response.id).replaceWith(newRowHtml); 
                     } else { 
-                        $("#content-section").prepend(newRowHtml); 
+                        $("#content-section").append(newRowHtml); 
                     }
                 },
                 error: function (xhr) {

@@ -75,7 +75,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="https://webkutir.org" target="_blank">webkutir.org</a> 2023</p>
+                <p>Copyright © Designed &amp; Developed by <a href="https://iconisl.com.bd" target="_blank">iconisl.com</a> 2024</p>
             </div>
         </div>
         <!--**********************************

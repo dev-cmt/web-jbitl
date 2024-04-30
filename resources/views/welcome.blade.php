@@ -123,20 +123,11 @@
                 </article>
                 <!-- Services Creative-->
                 <article class="services-creative">
-                    <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/frontend')}}/images/services/erosion-control.jpg" alt="" width="370" height="230" /></a>
-                    <div class="services-creative-caption">
-                        <h5 class="services-creative-title"><a href="single-service.html">Erosion Control</a></h5>
-                        <p class="services-creative-text description_3">Ut tellus elementum sagittis vitae et leo. Sagittis id consectetur purus ut faucibus.</p>
-                        <span class="services-creative-counter box-ordered-item">04</span>
-                    </div>
-                </article>
-                <!-- Services Creative-->
-                <article class="services-creative">
                     <a class="services-creative-figure" href="single-service.html"><img src="{{asset('public/frontend')}}/images/services/value-engineering.jpg" alt="" width="370" height="230" /></a>
                     <div class="services-creative-caption">
                         <h5 class="services-creative-title"><a href="single-service.html">Value Engineering</a></h5>
                         <p class="services-creative-text description_3">Value engineering is used to solve problems and eliminate any unwanted costs.</p>
-                        <span class="services-creative-counter box-ordered-item">05</span>
+                        <span class="services-creative-counter box-ordered-item">04</span>
                     </div>
                 </article>
                 <!-- Services Creative-->
@@ -145,7 +136,7 @@
                     <div class="services-creative-caption">
                         <h5 class="services-creative-title"><a href="single-service.html">Quality Control</a></h5>
                         <p class="services-creative-text description_3">We control the quality of all our projects, especially the most complex ones.</p>
-                        <span class="services-creative-counter box-ordered-item">06</span>
+                        <span class="services-creative-counter box-ordered-item">05</span>
                     </div>
                 </article>
             </div>
@@ -266,8 +257,7 @@
                                 href="{{asset('public/frontend')}}/images/project-6-1200x800-original.jpg" data-lightgallery="item"><img
                                     src="{{asset('public/frontend')}}/images/grid-gallery-7-474x355.jpg" alt="" width="474" height="355" /></a>
                             <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">wilson co.
-                                        Headquarters</a></h5>
+                                <h5 class="thumbnail-modern-title"><a href="project-page.html">wilson co. Headquarters</a></h5>
                             </div>
                         </article>
                     </div>
@@ -280,8 +270,7 @@
                                 href="{{asset('public/frontend')}}/images/grid-gallery-8-1200x800-original.jpg" data-lightgallery="item"><img
                                     src="{{asset('public/frontend')}}/images/grid-gallery-8-474x355.jpg" alt="" width="474" height="355" /></a>
                             <div class="thumbnail-modern-caption">
-                                <h5 class="thumbnail-modern-title"><a href="project-page.html">Abington
-                                        University</a></h5>
+                                <h5 class="thumbnail-modern-title"><a href="project-page.html">Abington University</a></h5>
                             </div>
                         </article>
                     </div>
@@ -403,37 +392,37 @@
                     <div class="clients-classic-wrap">
                         <div class="row no-gutters">
                             <div class="col-sm-6 wow fadeInLeft">
-                                <div class="clients-classic"><a class="clients-classic-figure" href="#"><img
-                                            src="{{asset('public/frontend')}}/images/clients-1-200x90.png" alt="" width="200" height="90" /></a>
+                                <div class="clients-classic">
+                                    <a class="clients-classic-figure" href="#"><img src="{{asset('public/frontend')}}/images/clients-1-200x90.png" alt="" width="200" height="90" /></a>
                                 </div>
                             </div>
                             <div class="col-sm-6 wow fadeInRight">
-                                <div class="clients-classic"><a class="clients-classic-figure" href="#"><img
-                                            src="{{asset('public/frontend')}}/images/clients-2-200x90.png" alt="" width="200" height="90" /></a>
+                                <div class="clients-classic">
+                                    <a class="clients-classic-figure" href="#"><img src="{{asset('public/frontend')}}/images/clients-2-200x90.png" alt="" width="200" height="90" /></a>
                                 </div>
                             </div>
                         </div>
                         <div class="row no-gutters">
                             <div class="col-sm-6 wow fadeInLeft">
-                                <div class="clients-classic"><a class="clients-classic-figure" href="#"><img
-                                            src="{{asset('public/frontend')}}/images/clients-3-200x90.png" alt="" width="200" height="90" /></a>
+                                <div class="clients-classic">
+                                    <a class="clients-classic-figure" href="#"><img src="{{asset('public/frontend')}}/images/clients-3-200x90.png" alt="" width="200" height="90" /></a>
                                 </div>
                             </div>
                             <div class="col-sm-6 wow fadeInRight">
-                                <div class="clients-classic"><a class="clients-classic-figure" href="#"><img
-                                            src="{{asset('public/frontend')}}/images/clients-4-200x90.png" alt="" width="200" height="90" /></a>
+                                <div class="clients-classic">
+                                    <a class="clients-classic-figure" href="#"><img src="{{asset('public/frontend')}}/images/clients-4-200x90.png" alt="" width="200" height="90" /></a>
                                 </div>
                             </div>
                         </div>
                         <div class="row no-gutters">
                             <div class="col-sm-6 wow fadeInLeft">
-                                <div class="clients-classic"><a class="clients-classic-figure" href="#"><img
-                                            src="{{asset('public/frontend')}}/images/clients-5-200x90.png" alt="" width="200" height="90" /></a>
+                                <div class="clients-classic">
+                                    <a class="clients-classic-figure" href="#"><img src="{{asset('public/frontend')}}/images/clients-5-200x90.png" alt="" width="200" height="90" /></a>
                                 </div>
                             </div>
                             <div class="col-sm-6 wow fadeInRight">
-                                <div class="clients-classic"><a class="clients-classic-figure" href="#"><img
-                                            src="{{asset('public/frontend')}}/images/clients-6-200x90.png" alt="" width="200" height="90" /></a>
+                                <div class="clients-classic">
+                                    <a class="clients-classic-figure" href="#"><img src="{{asset('public/frontend')}}/images/clients-6-200x90.png" alt="" width="200" height="90" /></a>
                                 </div>
                             </div>
                         </div>
@@ -449,33 +438,29 @@
                 <div class="row row-30 justify-content-center justify-content-xl-between align-items-lg-end">
                     <div class="col-sm-6 col-md-3">
                         <div class="counter-classic">
-                            <h3 class="counter-classic-number"><span class="counter">640</span>
-                            </h3>
-                            <h6 class="counter-classic-title">projects</h6>
+                            <h3 class="counter-classic-number"><span class="counter">100</span>+</h3>
+                            <h6 class="counter-classic-title">Project</h6>
                             <div class="counter-classic-decor"></div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">
                         <div class="counter-classic">
-                            <h3 class="counter-classic-number"><span class="counter">15</span>
-                            </h3>
-                            <h6 class="counter-classic-title">awards won</h6>
+                            <h3 class="counter-classic-number"><span class="counter">25</span></h3>
+                            <h6 class="counter-classic-title">Certification & Award</h6>
                             <div class="counter-classic-decor"></div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">
                         <div class="counter-classic">
-                            <h3 class="counter-classic-number"><span class="counter">24</span>
-                            </h3>
-                            <h6 class="counter-classic-title">partners</h6>
+                            <h3 class="counter-classic-number"><span class="counter">1000</span>+</h3>
+                            <h6 class="counter-classic-title">Products</h6>
                             <div class="counter-classic-decor"></div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3">
                         <div class="counter-classic">
-                            <h3 class="counter-classic-number"><span class="counter">15</span>
-                            </h3>
-                            <h6 class="counter-classic-title">new clients</h6>
+                            <h3 class="counter-classic-number"><span class="counter">87</span></h3>
+                            <h6 class="counter-classic-title">Value Clients</h6>
                             <div class="counter-classic-decor"></div>
                         </div>
                     </div>

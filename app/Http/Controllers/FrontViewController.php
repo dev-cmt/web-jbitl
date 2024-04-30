@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Contact;
 use App\Models\Admin\Gallery;
 use App\Models\Admin\GalleryImages;
 use App\Models\Admin\Event;
-use App\Models\Master\MemberType;
-use App\Models\Master\CommitteeType;
+use App\Models\Product\ProductCategory;
+use App\Models\Product\ProductItem;
 use App\Models\User;
-use DB;
 
 class FrontViewController extends Controller
 {
@@ -30,11 +31,13 @@ class FrontViewController extends Controller
      */
     public function productCategory()
     {
-        return view('frontend.pages.products-category');
+        $data = ProductCategory::where('status', 1)->orderBy('index', 'asc')->get();
+        return view('frontend.pages.products-category', compact('data'));
     }
-    public function productItem()
+    public function productItem($id)
     {
-        return view('frontend.pages.products-item');
+        $data = ProductItem::where('product_category_id', $id)->where('status', 1)->orderBy('index', 'asc')->get();
+        return view('frontend.pages.products-item', compact('data'));
     }
     
     
@@ -81,7 +84,7 @@ class FrontViewController extends Controller
      */
     public function galleryImage()
     {
-        $posts=Gallery::where('public','=','1')->orderBy('created_at', 'desc')->with('user')->get();
+        $posts= Gallery::where('public','=','1')->orderBy('created_at', 'desc')->with('user')->get();
         return view('frontend.pages.gallery_album', compact('posts'));
     }
     public function galleryShow($id)

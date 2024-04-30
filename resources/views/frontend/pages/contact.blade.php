@@ -72,7 +72,7 @@
                                 <p class="aside-contacts-title">E-mail</p>
                                 <div class="unit unit-spacing-xs justify-content-center justify-content-md-start">
                                     <div class="unit-left"><span class="icon mdi mdi-email-outline"></span></div>
-                                    <div class="unit-body"><a class="mail" href="mailto:#">info@jbitl.net</a>
+                                    <div class="unit-body"><a class="mail" href="mailto:#">info@jbitl.co</a>
                                     </div>
                                 </div>
                             </div>

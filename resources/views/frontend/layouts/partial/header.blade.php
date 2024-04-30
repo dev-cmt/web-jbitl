@@ -76,7 +76,7 @@
                                 <li class="rd-nav-item {{ (Route::currentRouteName() == '/') ? 'active' : '' }}"><a class="rd-nav-link" href="{{route('/')}}">Home</a></li>
                                 <li class="rd-nav-item {{ (Route::currentRouteName() == 'page.products-category') ? 'active' : '' }}"><a class="rd-nav-link" href="{{route('page.products-category')}}">Products</a></li>
                                 <li class="rd-nav-item {{ in_array(Route::currentRouteName(), ['page.about-us', 'page.project-info', 'page.contact-us']) ? 'active' : '' }}">
-                                    <a class="rd-nav-link" href="about-us.html">Information</a>
+                                    <a class="rd-nav-link" href="{{route('page.about-us')}}">Information</a>
                                     <!-- RD Navbar Dropdown-->
                                     <ul class="rd-menu rd-navbar-dropdown">
                                         <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{route('page.about-us')}}">Company</a></li>

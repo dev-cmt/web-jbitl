@@ -44,7 +44,7 @@
                                 <div class="footer-classic-contacts-item">
                                     <div class="unit unit-spacing-sm align-items-center">
                                         <div class="unit-left"><span class="icon mdi mdi-email"></span></div>
-                                        <div class="unit-body"><a class="mail" href="mailto:#">info@jbitl.net</a></div>
+                                        <div class="unit-body"><a class="mail" href="mailto:#">info@jbitl.co</a></div>
                                     </div>
                                 </div>
                             </div><a class="button button-sm button-primary button-winona"

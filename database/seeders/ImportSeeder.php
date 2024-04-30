@@ -23,7 +23,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'1',
+            'index'=>'0',
         ]);
         ProductCategory::create([
             'code'=>'2000',
@@ -32,7 +32,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'2',
+            'index'=>'0',
         ]);
         ProductCategory::create([
             'code'=>'3000',
@@ -41,7 +41,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'3',
+            'index'=>'0',
         ]);
         ProductCategory::create([
             'code'=>'4000',
@@ -50,7 +50,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'4',
+            'index'=>'0',
         ]);
         ProductCategory::create([
             'code'=>'5000',
@@ -59,7 +59,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'5',
+            'index'=>'0',
         ]);
         ProductCategory::create([
             'code'=>'6000',
@@ -68,7 +68,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'6',
+            'index'=>'0',
         ]);
         ProductCategory::create([
             'code'=>'7000',
@@ -77,7 +77,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'7',
+            'index'=>'0',
         ]);
         ProductCategory::create([
             'code'=>'8000',
@@ -86,7 +86,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'8',
+            'index'=>'0',
         ]);
         ProductCategory::create([
             'code'=>'9000',
@@ -95,7 +95,7 @@ class ImportSeeder extends Seeder
             'icon'=>'mdi mdi-chemical-weapon',
             'status'=>'1',
             'user_id'=>'1',
-            'index'=>'9',
+            'index'=>'0',
         ]);
         
     }
